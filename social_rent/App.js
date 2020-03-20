@@ -25,6 +25,9 @@ export default function App() {
           },
           headerTintColor: 'white'
         }}
+        // screenOptions={{
+        //   headerShown: false
+        // }}
       >
         <Stack.Screen name='Landing Page' component={Coba} />
         <Stack.Screen name='Home' component={Home} />
