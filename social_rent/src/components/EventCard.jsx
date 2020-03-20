@@ -12,7 +12,7 @@ export default function EventCard(props) {
 
    return (
       <>
-         <TouchableOpacity>
+         <TouchableOpacity onPress={() => props.navigation.navigate('Event Detail')}>
             <View style={{
                marginTop: 10, marginBottom: 20, shadowOpacity: 0.8, shadowRadius: 2
             }}>
@@ -25,13 +25,15 @@ export default function EventCard(props) {
                />
                {/* nanti diterusin disini buat bikin  card */}
                <View style={{ marginTop: 10, marginHorizontal: 5, flexDirection: 'row' }}>
-                  <Image
-                     source={{
-                        uri: 'https://m.media-amazon.com/images/I/71yspNc9hqL._SS500_.jpg',
-                        height: 40, width: 40, borderRadius: 100
-                     }}
-                     style={{ borderRadius: 20 }}
-                  />
+                  <TouchableOpacity onPress={() => props.navigation.navigate('Profile')}>
+                     <Image
+                        source={{
+                           uri: 'https://m.media-amazon.com/images/I/71yspNc9hqL._SS500_.jpg',
+                           height: 40, width: 40, borderRadius: 100
+                        }}
+                        style={{ borderRadius: 20 }}
+                     />
+                  </TouchableOpacity>
                   <View style={{ marginHorizontal: 10 }}>
                      <Text style={{ marginTop: 0, fontWeight: 'bold', fontStyle: 'italic' }}>Niki prakoso</Text>
                      <Text style={{ color: 'grey' }}>Ini adalah deskripsi dari event...</Text>

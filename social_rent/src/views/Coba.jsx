@@ -126,6 +126,7 @@ class Login extends Component {
     this.loginHit = () => {
       // untuk nge hit ke server saat login
       console.log('ke hit nih');
+      this.onCloseState
       props.navigation.navigate('Home')
       
     }
