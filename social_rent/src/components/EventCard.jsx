@@ -13,24 +13,26 @@ export default function EventCard(props) {
    return (
       <>
          <TouchableOpacity>
-            <View style={{ marginTop: 30 }}>
+            <View style={{
+               marginTop: 10, marginBottom: 20, shadowOpacity: 0.8, shadowRadius: 2
+            }}>
                <Image
                   source={{
-                     uri: 'https://topnotchtalent.com/wp-content/uploads/holiday-party-entertainment-top-notch-talent.jpg',
-                     height: 200, width: 300, borderRadius: 25
+                     uri: 'https://thoughtcatalog.files.wordpress.com/2016/08/bffs-2.jpg?w=1140&h=760',
+                     height: 150, width: 300, borderRadius: 25
                   }}
                   style={{ borderRadius: 20 }}
                />
                {/* nanti diterusin disini buat bikin  card */}
-               <View style={{ marginTop: 5, marginHorizontal: 5, flexDirection: 'row' }}>
+               <View style={{ marginTop: 10, marginHorizontal: 5, flexDirection: 'row' }}>
                   <Image
                      source={{
-                        uri: 'https://i0.wp.com/post.healthline.com/wp-content/uploads/2019/03/Female_Smilling_Dimples_1296x728-header-1296x728.jpg?w=1155&h=1528',
+                        uri: 'https://m.media-amazon.com/images/I/71yspNc9hqL._SS500_.jpg',
                         height: 40, width: 40, borderRadius: 100
                      }}
                      style={{ borderRadius: 20 }}
                   />
-                  <View style={{ marginHorizontal: 5 }}>
+                  <View style={{ marginHorizontal: 10 }}>
                      <Text style={{ marginTop: 0, fontWeight: 'bold', fontStyle: 'italic' }}>Niki prakoso</Text>
                      <Text style={{ color: 'grey' }}>Ini adalah deskripsi dari event...</Text>
                   </View>
@@ -40,3 +42,15 @@ export default function EventCard(props) {
       </>
    )
 }
+
+const styles = StyleSheet.create({
+   shadow: {
+      shadowColor: "#000000",
+      shadowOpacity: 0.8,
+      shadowRadius: 2,
+      shadowOffset: {
+         height: 1,
+         width: 0
+      }
+   }
+})
