@@ -3,9 +3,11 @@ import {
    StyleSheet,
    View,
    Image,
-   ScrollView
+   ScrollView,
+   TouchableOpacity,
+   Text
 } from 'react-native'
-import { Text, Card, Block, theme } from 'galio-framework'
+import EventCard from '../components/EventCard'
 
 export default function Home() {
 
@@ -13,17 +15,10 @@ export default function Home() {
       <>
          <ScrollView>
             <View style={styles.container}>
-
-               <View style={{  marginTop: 30 }}>
-                  <Image
-                     source={{
-                        uri: 'https://topnotchtalent.com/wp-content/uploads/holiday-party-entertainment-top-notch-talent.jpg',
-                        height: 250, width: 300, borderRadius: 25
-                     }}
-                     style={{ borderRadius: 20 }}
-                  />
-                  {/* nanti diterusin disini buat bikin  card */}
-               </View>
+               <EventCard />
+               <EventCard />
+               <EventCard />
+               <EventCard />
 
             </View>
          </ScrollView>
