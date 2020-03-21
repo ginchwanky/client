@@ -9,12 +9,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-<<<<<<< HEAD
-import Login from './src/views/Login'
-import Coba2 from './src/views/Coba2'
-=======
 import Coba from './src/views/Coba'
->>>>>>> 2273643899d9d8b1448518d49c33144cf9e75cd5
 import Home from './src/views/Home'
 import Profile from './src/views/Profile'
 import EventDetail from './src/views/EventDetail'
