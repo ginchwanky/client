@@ -7,14 +7,34 @@ import {
 import { Asset } from 'expo-asset'
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-import Login from './src/views/Login'
 import Coba from './src/views/Coba'
 import Home from './src/views/Home'
 import Profile from './src/views/Profile'
 import EventDetail from './src/views/EventDetail'
+import Chats from './src/views/Chats'
 
 const Stack = createStackNavigator()
+const Tab = createBottomTabNavigator()
+
+function HomeScreen() {
+  return (
+    <Tab.Navigator
+      tabBarOptions={{
+        activeTintColor: '#2E71DC',
+        inactiveTintColor: 'gray',
+        showIcon: true,
+        showLabel: true
+      }}
+      initialRouteName='Events'
+    >
+      <Tab.Screen name="Chats" component={Chats} />
+      <Tab.Screen name="Events" component={Home} />
+      <Tab.Screen name="Profile" component={Profile} />
+    </Tab.Navigator>
+  )
+}
 
 export default function App() {
   return (
@@ -32,7 +52,7 @@ export default function App() {
         }}
       >
         <Stack.Screen name='Landing Page' component={Coba} />
-        <Stack.Screen name='Home' component={Home} />
+        <Stack.Screen name='Home' component={HomeScreen} />
         <Stack.Screen name='Profile' component={Profile} />
         <Stack.Screen name='Event Detail' component={EventDetail} />
       </Stack.Navigator>

@@ -1,5 +1,20 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Image, Dimensions, TextInput, TouchableOpacity, Alert, KeyboardAvoidingView } from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  Dimensions,
+  TextInput,
+  TouchableOpacity,
+  Alert,
+  KeyboardAvoidingView
+} from 'react-native';
+import {
+  Block,
+  Input,
+  theme
+} from 'galio-framework'
 
 import Animated, { Easing } from 'react-native-reanimated';
 import { TapGestureHandler, State } from 'react-native-gesture-handler';
@@ -128,7 +143,7 @@ class Login extends Component {
       console.log('ke hit nih');
       this.onCloseState
       props.navigation.navigate('Home')
-      
+
     }
   }
 
@@ -212,20 +227,22 @@ class Login extends Component {
               </Animated.Text>
                 </Animated.View>
               </TapGestureHandler>
-              <TextInput
-                placeholder="EMAIL"
+              <Block middle style={{marginTop: 50}}>
+              <Input
+                placeholder="Email"
                 style={styles.textInput}
-                placeholderTextColor='black'
                 value={this.state.email}
                 onChangeText={(email) => { this.setState({ email }) }}
               />
-              <TextInput
-                placeholder="PASSWORD"
+              <Input 
+                placeholder="Password" 
+                password 
+                viewPass
                 style={styles.textInput}
                 value={this.state.password}
                 onChangeText={(password) => { this.setState({ password }) }}
-                placeholderTextColor='black'
               />
+              </Block>
               <TouchableOpacity onPress={this.loginHit}>
                 <Animated.View style={styles.button} >
                   <Text style={{ fontSize: 20, fontWeight: 'bold' }}>SIGN IN</Text>
@@ -257,12 +274,13 @@ const styles = StyleSheet.create({
     marginVertical: 5
   },
   textInput: {
+    width: width / 1.2,
     height: 50,
     borderRadius: 25,
     borderWidth: 0.5,
     marginHorizontal: 20,
     paddingHorizontal: 20,
-    marginVertical: 5,
+    marginVertical: 0,
     borderColor: 'rgba(0,0,0,0.2)'
   },
   closedButton: {
