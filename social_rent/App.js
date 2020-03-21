@@ -14,6 +14,8 @@ import Home from './src/views/Home'
 import Profile from './src/views/Profile'
 import EventDetail from './src/views/EventDetail'
 import Chats from './src/views/Chats'
+import PeopleProfile from './src/views/PeopleProfile'
+import GenerateBarcode from './src/views/GenerateBarcode'
 
 const Stack = createStackNavigator()
 const Tab = createBottomTabNavigator()
@@ -23,7 +25,7 @@ function HomeScreen() {
     <Tab.Navigator
       tabBarOptions={{
         activeTintColor: '#2E71DC',
-        inactiveTintColor: 'gray',
+        inactiveTintColor: 'grey',
         showIcon: true,
         showLabel: true
       }}
@@ -41,12 +43,6 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator
         initialRouteName='Landing Page'
-        // screenOptions={{
-        //   headerStyle: {
-        //     backgroundColor: 'black',
-        //   },
-        //   headerTintColor: 'white'
-        // }}
         screenOptions={{
           headerShown: false
         }}
@@ -55,6 +51,9 @@ export default function App() {
         <Stack.Screen name='Home' component={HomeScreen} />
         <Stack.Screen name='Profile' component={Profile} />
         <Stack.Screen name='Event Detail' component={EventDetail} />
+        <Stack.Screen name='People Profile' component={PeopleProfile} />
+        <Stack.Screen name='Generate Barcode' component={GenerateBarcode} />
+
       </Stack.Navigator>
     </NavigationContainer>
   );
