@@ -16,6 +16,7 @@ import EventDetail from './src/views/EventDetail'
 import Chats from './src/views/Chats'
 import PeopleProfile from './src/views/PeopleProfile'
 import GenerateBarcode from './src/views/GenerateBarcode'
+import BarcodeScanner from './src/views/BarcodeScanner'
 
 const Stack = createStackNavigator()
 const Tab = createBottomTabNavigator()
@@ -53,6 +54,7 @@ export default function App() {
         <Stack.Screen name='Event Detail' component={EventDetail} />
         <Stack.Screen name='People Profile' component={PeopleProfile} />
         <Stack.Screen name='Generate Barcode' component={GenerateBarcode} />
+        <Stack.Screen name='Barcode Scanner' component={BarcodeScanner} />
 
       </Stack.Navigator>
     </NavigationContainer>
