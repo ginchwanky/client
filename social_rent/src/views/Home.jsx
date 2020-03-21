@@ -32,8 +32,8 @@ export default function Home({ navigation }) {
             <ScrollView showsVerticalScrollIndicator={false}>
             <Block middle>
                <Text
-                  style={{ fontStyle: 'italic', marginTop: 20, marginBottom: 20, fontSize: 17, color: 'white', fontWeight: 'bold' }}
-               >Swipe right to open the menu >>
+                  style={{ fontStyle: 'normal', marginTop: 20, marginBottom: 20, fontSize: 20, color: 'white', fontWeight: 'bold' }}
+               >Available events
                </Text>
             </Block>
                <View style={styles.container}>
@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
       borderRadius: 15,
       marginHorizontal: 10,
       paddingTop: 10,
-      paddingBottom: 30
+      paddingBottom: 80
    },
    test: {
       fontSize: 20,
