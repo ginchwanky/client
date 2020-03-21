@@ -135,6 +135,7 @@ export default function Profile({ navigation }) {
                   </Block>
                   {/* disini loop events history */}
                   <EventHistoryCard />
+                  
                 </Block>
               </Block>
 
