@@ -9,7 +9,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
 import Login from './src/views/Login'
-import Coba from './src/views/Coba'
+import Coba2 from './src/views/Coba2'
 import Home from './src/views/Home'
 import Profile from './src/views/Profile'
 import EventDetail from './src/views/EventDetail'
@@ -31,7 +31,7 @@ export default function App() {
           headerShown: false
         }}
       >
-        <Stack.Screen name='Landing Page' component={Coba} />
+        <Stack.Screen name='Landing Page' component={Coba2} />
         <Stack.Screen name='Home' component={Home} />
         <Stack.Screen name='Profile' component={Profile} />
         <Stack.Screen name='Event Detail' component={EventDetail} />
