@@ -38,17 +38,17 @@ export default function Profile({ navigation }) {
       <Block flex style={styles.profile}>
         <Block flex>
           <ImageBackground
-            source={require('../../assets/bg.png')}
+            // source={require('../../assets/bg.png')}
+            source={{uri: 'https://c0.wallpaperflare.com/preview/424/107/611/black-camera.jpg'}}
             style={styles.profileContainer}
             imageStyle={styles.profileBackground}
           >
             <ScrollView
               showsVerticalScrollIndicator={false}
-              style={{ width, marginTop: '10%' }}
+              style={{ width}}
             >
 
               <Block flex style={styles.profileCard}>
-
                 <Block middle style={styles.avatarContainer}>
                   <Image
                     source={{ uri: 'https://cdnph.upi.com/svc/sv/upi/8631478538164/2016/1/a42cfe55775589649bbb7ea457a45e24/New-Childish-Gambino-album-titled-Awaken-My-Love-found-listed-on-Amazon.jpg' }}
@@ -155,7 +155,7 @@ export default function Profile({ navigation }) {
                     <Block style={styles.divider} />
                     <TouchableOpacity>
                       <View style={styles.button}>
-                        <Text style={{ fontSize: 15, fontWeight: 'bold' }}>
+                        <Text style={{ fontSize: 15, fontWeight: 'bold', color: 'red' }}>
                           LOGOUT
                         </Text>
                       </View>
@@ -178,7 +178,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#2E71DC'
   },
   profile: {
-    flex: 1
+    flex: 1,
   },
   profileContainer: {
     width: width,
@@ -194,7 +194,7 @@ const styles = StyleSheet.create({
     // position: "relative",
     padding: theme.SIZES.BASE,
     marginHorizontal: theme.SIZES.BASE,
-    marginTop: 65,
+    marginTop: 120,
     borderRadius: 20,
     backgroundColor: theme.COLORS.WHITE,
     shadowColor: "black",

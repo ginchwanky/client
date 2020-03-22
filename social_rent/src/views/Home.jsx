@@ -29,6 +29,7 @@ export default function Home({ navigation, props }) {
          <View style={styles.statusBar} />
          <ImageBackground
             source={require('../../assets/bg-profile.jpeg')}
+            // source={{uri: 'https://c0.wallpaperflare.com/preview/424/107/611/black-camera.jpg'}}
             style={styles.bgContainer}
             imageStyle={styles.background}
          >

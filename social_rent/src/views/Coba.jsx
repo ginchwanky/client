@@ -293,7 +293,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: -20,
     left: width / 2 - 20,
-    borderWidth: 2,
+    borderWidth: 3,
     borderColor: 'rgba(0,0,0,0.1)'
   }
 });

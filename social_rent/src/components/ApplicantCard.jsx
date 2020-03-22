@@ -20,7 +20,7 @@ export default function ApplicantCard(props) {
    return (
       <>
          <Block row style={{ marginVertical: 5 }}>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => props.navigation.navigate('People Profile')}>
                <Image
                   source={{
                      uri: 'https://m.media-amazon.com/images/I/71yspNc9hqL._SS500_.jpg',
