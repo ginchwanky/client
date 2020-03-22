@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import { register } from '../../store/actionCreators/userRegister'
 import {
@@ -83,7 +83,7 @@ class Login extends Component {
             profilePicture: '',
             isLogin: null
         }
-        // this.state.isLogin = useSelector(state => state.user.isLogin)
+        this.state.isLogin = useSelector(state => state.user.isLogin)
         this.registerHit = (name, email, password, age, gender, bio, profilePicture) => {
             // untuk nge hit ke server saat register
             // const dispatch = useDispatch()
@@ -96,10 +96,14 @@ class Login extends Component {
                 bio,
                 profilePicture
             }
-            // dispatch(register(payload))
+            dispatch(register(payload))
             this.onCloseState
-            props.navigation.navigate('Home', payload)
         }
+        useEffect(() => {
+            if (isLogin) {
+                props.navigation.navigate('Home', payload)
+            }
+        }, [isLogin])
 
         this.buttonOpacity = new Value(1);
 
