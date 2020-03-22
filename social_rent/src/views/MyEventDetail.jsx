@@ -13,6 +13,8 @@ import {
 } from 'galio-framework'
 import Constants from 'expo-constants'
 
+import ApplicantCard from '../components/ApplicantCard'
+
 const { width, height } = Dimensions.get('screen')
 
 export default function MyEventDetail({ route, navigation }) {
@@ -20,27 +22,40 @@ export default function MyEventDetail({ route, navigation }) {
    return (
       <>
          <View style={styles.statusBar} />
-         <ImageBackground
-            source={{ uri: 'https://i0.wp.com/mojok.co/terminal/wp-content/uploads/2019/08/sweet-ice-cream-photography-ASti7dxf8CM-unsplash.jpg?resize=800%2C540&ssl=1' }}
-            style={styles.profileContainer}
-            imageStyle={styles.profileBackground}
-         >
-            <Block style={styles.eventConatainer}>
+         <View style={{backgroundColor: 'white'}}>
+            <ImageBackground
+               source={{ uri: 'https://i0.wp.com/mojok.co/terminal/wp-content/uploads/2019/08/sweet-ice-cream-photography-ASti7dxf8CM-unsplash.jpg?resize=800%2C540&ssl=1' }}
+               style={styles.profileContainer}
+               imageStyle={styles.profileBackground}
+            >
                <ScrollView>
-                  <Block middle flex>
-                     <Text h3 bold style={{marginTop: 20}}>Kondangan</Text>
-                     <Text muted center style={{marginHorizontal: 20, marginVertical: 10}}>Hai i don't have that many friends to ask in order to accompanying me to one of my friends wedding. so can you pretend to be my gf atm?</Text>
-                     <Text p muted>Status: Pending</Text>
-                  <View style={styles.divider}/>
-                  <Text bold size={16} color="#525F7F">
-                      list of applicants
+                  <Block style={styles.eventConatainer}>
+                     <Block middle>
+                        <Text h3 bold style={{ marginTop: 20 }}>Kondangan</Text>
+                        <Text muted center style={{ marginHorizontal: 20, marginVertical: 10 }}>Hai i don't have that many friends to ask in order to accompanying me to one of my friends wedding. so can you pretend to be my gf atm?</Text>
+                        <Text p muted>Status: Pending</Text>
+                        <View style={styles.divider} />
+                        <Text bold size={16} color="#525F7F">
+                           list of applicants
                     </Text>
-                    {/* DISINI MAP APPLICANT NYA */}
-                    
+                        {/* <Text muted italic>Tap the applicant to hire or decline</Text> */}
+                     </Block>
+                     <Block
+                        left
+                        style={{ marginHorizontal: 15, marginBottom: 50, marginTop: 20}}
+                     >
+                        {/* DISINI MAP APPLICANT NYA */}
+                        <ApplicantCard navigation={navigation} />
+                        <ApplicantCard navigation={navigation} />
+                        <ApplicantCard navigation={navigation} />
+                        <ApplicantCard navigation={navigation} />
+                        <ApplicantCard navigation={navigation} />
+                        <ApplicantCard navigation={navigation} />
+                     </Block>
                   </Block>
                </ScrollView>
-            </Block>
-         </ImageBackground>
+            </ImageBackground>
+         </View>
       </>
    )
 }
@@ -62,7 +77,6 @@ const styles = StyleSheet.create({
    },
    eventConatainer: {
       width: width,
-      height: height,
       backgroundColor: 'white',
       borderTopLeftRadius: 30,
       borderTopRightRadius: 30,
@@ -73,5 +87,5 @@ const styles = StyleSheet.create({
       borderWidth: 1,
       borderColor: "#E9ECEF",
       marginVertical: 20
-    }
+   }
 })

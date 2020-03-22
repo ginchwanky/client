@@ -29,9 +29,20 @@ export default function MyEventCard(props) {
                />
                <View style={{ marginTop: 10, marginHorizontal: 5, flexDirection: 'row' }}>
                   <View style={{ marginHorizontal: 10, width: 250 }}>
-                     <Text muted style={{ marginTop: 0, fontWeight: 'bold', textAlign: 'center', fontSize: 20 }}>Kondangan</Text>
-                     <Text center style={{ color: 'grey', marginTop: 5 }}>Ini adalah deskripsi dari event. ini bertujuan untuk bla </Text>
-                     <Text center muted italic style={{ color: 'grey', marginTop: 5 }}>Status: pending</Text>
+                     <Text
+                        muted
+                        style={{ marginTop: 0, fontWeight: 'bold', textAlign: 'center', fontSize: 20 }}
+                     >Kondangan</Text>
+                     <Text
+                        center
+                        style={{ color: 'grey', marginTop: 5 }}
+                     >Ini adalah deskripsi dari event. ini bertujuan untuk bla </Text>
+                     <Text
+                        center
+                        muted
+                        italic
+                        style={{ color: 'grey', marginTop: 5 }}
+                     >Status: pending</Text>
                   </View>
                </View>
             </View>
