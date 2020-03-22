@@ -110,7 +110,7 @@ class Login extends Component {
 
     this.bgY = interpolate(this.buttonOpacity, {
       inputRange: [0, 1],
-      outputRange: [-height / 3, 0],
+      outputRange: [-(2/3) * height, 0],
       extrapolate: Extrapolate.CLAMP
     });
 
@@ -176,7 +176,7 @@ class Login extends Component {
               style={{ flex: 1, height: null, width: null }}
             />
           </Animated.View>
-          <View style={{ height: height / 3, justifyContent: 'center' }}>
+          <View style={{ height: (2/3) * height, justifyContent: 'center' }}>
             <TouchableOpacity>
               <TapGestureHandler onHandlerStateChange={this.onStateChange}>
                 <Animated.View
@@ -214,7 +214,7 @@ class Login extends Component {
                 zIndex: this.textInputZindex,
                 opacity: this.textInputOpacity,
                 transform: [{ translateY: this.textInputY }],
-                height: height / 3,
+                height: (2/3) * height,
                 ...StyleSheet.absoluteFill,
                 top: null,
                 justifyContent: 'center'
