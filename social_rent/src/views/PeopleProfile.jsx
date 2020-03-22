@@ -6,8 +6,7 @@ import {
   Image,
   Button,
   Dimensions,
-  ScrollView,
-  TouchableOpacity
+  ScrollView
 } from 'react-native'
 import {
   Text,
@@ -41,7 +40,7 @@ export default function Profile({ navigation }) {
 
                 <Block middle style={styles.avatarContainer}>
                   <Image
-                    source={{ uri: 'https://cdnph.upi.com/svc/sv/upi/8631478538164/2016/1/a42cfe55775589649bbb7ea457a45e24/New-Childish-Gambino-album-titled-Awaken-My-Love-found-listed-on-Amazon.jpg' }}
+                    source={{ uri: 'https://m.media-amazon.com/images/I/71yspNc9hqL._SS500_.jpg' }}
                     style={styles.avatar}
                   />
                 </Block>
@@ -53,20 +52,10 @@ export default function Profile({ navigation }) {
                     space="evenly"
                     style={{ marginTop: 20, paddingBottom: 24 }}
                   >
-                    <Block style={{ marginRight: 15 }}>
                       <Button
-                        title="edit profile"
+                        title="Send Message"
                         color="#2E71DC"
                       />
-                    </Block>
-                    <Block style={{ marginLeft: 15 }}>
-
-                      <Button
-                        title="Show Barcode"
-                        color="#2E71DC"
-                        onPress={() => navigation.navigate('Generate Barcode')}
-                      />
-                    </Block>
                   </Block>
                   <Block row space="between">
                     <Block middle>
@@ -109,10 +98,10 @@ export default function Profile({ navigation }) {
                 <Block flex>
                   <Block middle style={styles.nameInfo}>
                     <Text bold size={28} color="#32325D">
-                      Gambino, 24
+                      Niki Prakoso, 17
                     </Text>
                     <Text size={16} color="#32325D" style={{ marginTop: 10 }}>
-                      New York, USA
+                      Jakarta, Indonesia
                     </Text>
                   </Block>
                   <Block middle style={{ marginTop: 30, marginBottom: 16 }}>
@@ -135,27 +124,10 @@ export default function Profile({ navigation }) {
                       Events History
                     </Text>
                   </Block>
-                  <Block
-                    row
-                    style={{ paddingBottom: 20, justifyContent: "flex-end" }}
-                  >
-                    <Button
-                      title="create event +"
-                      color="#2E71DC"
-                    />
-                  </Block>
+                 
                   {/* disini loop events history */}
                   <EventHistoryCard />
-                  <Block middle style={{ marginTop: 30, marginBottom: 16 }}>
-                    <Block style={styles.divider} />
-                    <TouchableOpacity>
-                      <View style={styles.button}>
-                        <Text style={{ fontSize: 15, fontWeight: 'bold' }}>
-                          LOGOUT
-                        </Text>
-                      </View>
-                    </TouchableOpacity>
-                  </Block>
+
                 </Block>
               </Block>
 
@@ -218,12 +190,5 @@ const styles = StyleSheet.create({
     width: "90%",
     borderWidth: 1,
     borderColor: "#E9ECEF"
-  },
-  button: {
-    width: 100,
-    height: 50,
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginVertical: 5
   }
 })

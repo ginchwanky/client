@@ -33,10 +33,10 @@ export default function Home({ navigation, props }) {
             imageStyle={styles.background}
          >
             <ScrollView showsVerticalScrollIndicator={false}>
-               <Block middle>
-                  <Text
-                     style={{ fontStyle: 'normal', marginTop: 20, marginBottom: 20, fontSize: 20, color: 'white', fontWeight: 'bold' }}
-                  >Available events
+            <Block middle>
+               <Text
+                  style={{ fontStyle: 'normal', marginTop: 20, marginBottom: 20, fontSize: 20, color: 'white', fontWeight: 'bold' }}
+               >Available events
                </Text>
                   <Text>{name}</Text>
                </Block>

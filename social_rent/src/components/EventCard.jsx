@@ -25,7 +25,7 @@ export default function EventCard(props) {
                />
                {/* nanti diterusin disini buat bikin  card */}
                <View style={{ marginTop: 10, marginHorizontal: 5, flexDirection: 'row' }}>
-                  <TouchableOpacity onPress={() => props.navigation.navigate('Profile')}>
+                  <TouchableOpacity onPress={() => props.navigation.navigate('People Profile')}>
                      <Image
                         source={{
                            uri: 'https://m.media-amazon.com/images/I/71yspNc9hqL._SS500_.jpg',

@@ -10,10 +10,14 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import Coba2 from './src/views/Coba2'
+import Coba from './src/views/Coba'
 import Home from './src/views/Home'
 import Profile from './src/views/Profile'
 import EventDetail from './src/views/EventDetail'
 import Chats from './src/views/Chats'
+import PeopleProfile from './src/views/PeopleProfile'
+import GenerateBarcode from './src/views/GenerateBarcode'
+import BarcodeScanner from './src/views/BarcodeScanner'
 
 const Stack = createStackNavigator()
 const Tab = createBottomTabNavigator()
@@ -23,7 +27,7 @@ function HomeScreen() {
     <Tab.Navigator
       tabBarOptions={{
         activeTintColor: '#2E71DC',
-        inactiveTintColor: 'gray',
+        inactiveTintColor: 'grey',
         showIcon: true,
         showLabel: true
       }}
@@ -41,20 +45,19 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator
         initialRouteName='Landing Page'
-        // screenOptions={{
-        //   headerStyle: {
-        //     backgroundColor: 'black',
-        //   },
-        //   headerTintColor: 'white'
-        // }}
         screenOptions={{
           headerShown: false
         }}
       >
-        <Stack.Screen name='Landing Page' component={Coba2} />
+        <Stack.Screen name='Register' component={Coba2} />
+        <Stack.Screen name='Landing Page' component={Coba} />
         <Stack.Screen name='Home' component={HomeScreen} />
         <Stack.Screen name='Profile' component={Profile} />
         <Stack.Screen name='Event Detail' component={EventDetail} />
+        <Stack.Screen name='People Profile' component={PeopleProfile} />
+        <Stack.Screen name='Generate Barcode' component={GenerateBarcode} />
+        <Stack.Screen name='Barcode Scanner' component={BarcodeScanner} />
+
       </Stack.Navigator>
     </NavigationContainer>
   );
