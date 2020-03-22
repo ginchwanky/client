@@ -27,13 +27,14 @@ export default function Profile({ navigation }) {
       <Block flex style={styles.profile}>
         <Block flex>
           <ImageBackground
-            source={require('../../assets/bg.png')}
+            // source={require('../../assets/bg.png')}
+            source={{uri: 'https://c0.wallpaperflare.com/preview/424/107/611/black-camera.jpg'}}
             style={styles.profileContainer}
             imageStyle={styles.profileBackground}
           >
             <ScrollView
               showsVerticalScrollIndicator={false}
-              style={{ width, marginTop: '10%' }}
+              style={{ width }}
             >
 
               <Block flex style={styles.profileCard}>
@@ -145,7 +146,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#2E71DC'
   },
   profile: {
-    flex: 1
+    flex: 1,
   },
   profileContainer: {
     width: width,
@@ -161,7 +162,7 @@ const styles = StyleSheet.create({
     // position: "relative",
     padding: theme.SIZES.BASE,
     marginHorizontal: theme.SIZES.BASE,
-    marginTop: 65,
+    marginTop: 120,
     borderRadius: 20,
     backgroundColor: theme.COLORS.WHITE,
     shadowColor: "black",
