@@ -38,7 +38,6 @@ export default function Home({ navigation, props }) {
                   style={{ fontStyle: 'normal', marginTop: 20, marginBottom: 20, fontSize: 20, color: 'white', fontWeight: 'bold' }}
                >Available events
                </Text>
-                  <Text>{name}</Text>
                </Block>
                <View style={styles.container}>
                   <EventCard navigation={navigation} />

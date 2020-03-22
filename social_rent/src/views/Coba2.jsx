@@ -99,11 +99,11 @@ class Login extends Component {
             dispatch(register(payload))
             this.onCloseState
         }
-        useEffect(() => {
-            if (isLogin) {
-                props.navigation.navigate('Home', payload)
-            }
-        }, [isLogin])
+        // useEffect(() => {
+        //     if (isLogin) {
+        //         props.navigation.navigate('Home', payload)
+        //     }
+        // }, [isLogin])
 
         this.buttonOpacity = new Value(1);
 

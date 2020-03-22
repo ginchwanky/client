@@ -176,7 +176,7 @@ class Login extends Component {
               style={{ flex: 1, height: null, width: null }}
             />
           </Animated.View>
-          <View style={{ height: (2/3) * height, justifyContent: 'center' }}>
+          <View style={{ height: (1/3) * height, justifyContent: 'center' }}>
             <TouchableOpacity>
               <TapGestureHandler onHandlerStateChange={this.onStateChange}>
                 <Animated.View

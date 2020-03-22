@@ -5,8 +5,11 @@ import {
    Image,
    ScrollView,
    TouchableOpacity,
-   Text
 } from 'react-native'
+import {
+   Text,
+   theme
+} from 'galio-framework'
 
 export default function EventCard(props) {
 
@@ -28,16 +31,17 @@ export default function EventCard(props) {
                      <Image
                         source={{
                            uri: 'https://m.media-amazon.com/images/I/71yspNc9hqL._SS500_.jpg',
-                           height: 40, width: 40, borderRadius: 100
+                           height: 40, width: 40
                         }}
-                        style={{ borderRadius: 20 }}
+                        style={{ borderRadius: 100 }}
                      />
                   </TouchableOpacity>
                   <View style={{ marginHorizontal: 10, width: 200 }}>
                      <Text style={{ marginTop: 0, fontWeight: 'bold', fontStyle: 'italic' }}>Niki prakoso</Text>
                      {
                         /* nanti pakai cuma beberapa character description terus kasih titik tiga(...) */}
-                     <Text style={{ color: 'grey' }}>Ini adalah deskripsi dari event...</Text>
+                     <Text muted >Judul Event</Text>
+                     <Text muted >Ini adalah deskripsi dari event...</Text>
                   </View>
                </View>
             </View>
