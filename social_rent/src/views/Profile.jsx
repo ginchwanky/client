@@ -159,7 +159,6 @@ export default function Profile({ navigation }) {
                       </View>
                     </TouchableOpacity>
                   </Block>
-
                 </Block>
               </Block>
 
