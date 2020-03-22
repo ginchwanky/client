@@ -146,8 +146,6 @@ export default function Profile({ navigation }) {
                   </Block>
                   {/* disini loop events history */}
                   <EventHistoryCard />
-
-
                   <Block middle style={{ marginTop: 30, marginBottom: 16 }}>
                     <Block style={styles.divider} />
                     <TouchableOpacity>
@@ -158,7 +156,6 @@ export default function Profile({ navigation }) {
                       </View>
                     </TouchableOpacity>
                   </Block>
-
                 </Block>
               </Block>
 

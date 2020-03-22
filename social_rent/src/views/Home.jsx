@@ -16,11 +16,14 @@ import {
 import Constants from 'expo-constants';
 
 import EventCard from '../components/EventCard'
+import { useSelector } from 'react-redux';
 
 const { width, height } = Dimensions.get("screen");
 
-export default function Home({ navigation }) {
-
+export default function Home({ navigation, props }) {
+   const {
+      isLoading, isLogin, name, email, age, gender, bio, profilePicture
+   } = useSelector(state => state)
    return (
       <>
          <View style={styles.statusBar} />
@@ -35,7 +38,8 @@ export default function Home({ navigation }) {
                   style={{ fontStyle: 'normal', marginTop: 20, marginBottom: 20, fontSize: 20, color: 'white', fontWeight: 'bold' }}
                >Available events
                </Text>
-            </Block>
+                  <Text>{name}</Text>
+               </Block>
                <View style={styles.container}>
                   <EventCard navigation={navigation} />
                   <EventCard navigation={navigation} />
