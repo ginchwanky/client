@@ -23,7 +23,6 @@ export default function EventCard(props) {
                   }}
                   style={{ borderRadius: 20 }}
                />
-               {/* nanti diterusin disini buat bikin  card */}
                <View style={{ marginTop: 10, marginHorizontal: 5, flexDirection: 'row' }}>
                   <TouchableOpacity onPress={() => props.navigation.navigate('People Profile')}>
                      <Image
@@ -34,8 +33,10 @@ export default function EventCard(props) {
                         style={{ borderRadius: 20 }}
                      />
                   </TouchableOpacity>
-                  <View style={{ marginHorizontal: 10 }}>
+                  <View style={{ marginHorizontal: 10, width: 200 }}>
                      <Text style={{ marginTop: 0, fontWeight: 'bold', fontStyle: 'italic' }}>Niki prakoso</Text>
+                     {
+                        /* nanti pakai cuma beberapa character description terus kasih titik tiga(...) */}
                      <Text style={{ color: 'grey' }}>Ini adalah deskripsi dari event...</Text>
                   </View>
                </View>

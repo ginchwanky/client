@@ -17,7 +17,7 @@ import Constants from 'expo-constants'
 const { width, height } = Dimensions.get('screen')
 
 export default function GenerateBarcode({ navigation, route }) {
-   const [QrCode, setQrCode] = useState(30);
+   const [QrCode, setQrCode] = useState('test');
 
    return (
       <>
@@ -29,8 +29,10 @@ export default function GenerateBarcode({ navigation, route }) {
             <View style={styles.container}>
 
                <Block style={styles.barcodeCard}>
-                  <Block style={styles.topCard} />
-                  <Block middle style={{ marginTop: 50 }}>
+                  <Block style={styles.topCard} >
+
+                  </Block>
+                  <Block middle style={{ marginTop: 30 }}>
                      <Image
                         source={{
                            uri: `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${QrCode}`,
@@ -73,15 +75,15 @@ const styles = StyleSheet.create({
       backgroundColor: '#2E71DC'
    },
    barcodeCard: {
-      height: height / 2,
+      height: height / 2.2,
       width: 300,
       backgroundColor: 'white',
-      borderRadius: 25
+      borderRadius: 25,
    },
    topCard: {
       width: 300,
-      height: 50,
-      backgroundColor: '#d4d3cf',
+      height: 70,
+      backgroundColor: '#f2f4f7',
       borderTopRightRadius: 25,
       borderTopLeftRadius: 25
    },

@@ -132,7 +132,7 @@ export default function Profile({ navigation }) {
                     style={{ paddingVertical: 14, alignItems: "baseline" }}
                   >
                     <Text bold size={16} color="#525F7F">
-                      Events History
+                      Recent Events
                     </Text>
                   </Block>
                   <Block
@@ -140,15 +140,16 @@ export default function Profile({ navigation }) {
                     style={{ paddingBottom: 20, justifyContent: "flex-end" }}
                   >
                     <Button
-                      title="create event +"
+                      title="my events"
                       color="#2E71DC"
                     />
                   </Block>
-                  {/* disini loop events history */}
+                  {/* disini loop recents events */}
+                  <EventHistoryCard />
+                  <EventHistoryCard />
                   <EventHistoryCard />
 
-
-                  <Block middle style={{ marginTop: 30, marginBottom: 16 }}>
+                  <Block middle style={{ marginTop: 30, marginBottom: 60 }}>
                     <Block style={styles.divider} />
                     <TouchableOpacity>
                       <View style={styles.button}>
