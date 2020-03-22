@@ -27,9 +27,10 @@ export default function EventHistoryCard(props) {
                      }}
                      style={{ borderRadius: 10 }}
                   />
-                  <Block left style={{margin: 10, width: 180}}>
+                  <Block left style={{marginLeft: 10, width: 180}}>
                      <Text size={15} style={{fontWeight: 'bold', marginBottom: 5}}>kondangan</Text>
                      <Text muted>ini adalah sedikit deskripsi dari event yang ada disini</Text>
+                     <Text muted italic size={14}>Status: complete</Text>
                   </Block>
                </Block>
             </Block>

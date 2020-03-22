@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   StyleSheet,
   View,
@@ -12,15 +12,25 @@ import {
 import {
   Text,
   Block,
-  theme
+  theme,
+  Input
 } from 'galio-framework'
 import Constants from 'expo-constants'
+import Modal from 'react-native-modal';
 
 import EventHistoryCard from '../components/EventHistoryCard'
 
 const { width, height } = Dimensions.get("screen");
 
 export default function Profile({ navigation }) {
+
+
+  let dataDropdown = [{
+    value: 'male',
+  }, {
+    value: 'female',
+  }]
+
 
   return (
     <>
@@ -53,20 +63,11 @@ export default function Profile({ navigation }) {
                     space="evenly"
                     style={{ marginTop: 20, paddingBottom: 24 }}
                   >
-                    <Block style={{ marginRight: 15 }}>
-                      <Button
-                        title="edit profile"
-                        color="#2E71DC"
-                      />
-                    </Block>
-                    <Block style={{ marginLeft: 15 }}>
-
-                      <Button
-                        title="Show Barcode"
-                        color="#2E71DC"
-                        onPress={() => navigation.navigate('Generate Barcode')}
-                      />
-                    </Block>
+                    <Button
+                      title="Show Barcode"
+                      color="#2E71DC"
+                      onPress={() => navigation.navigate('Generate Barcode')}
+                    />
                   </Block>
                   <Block row space="between">
                     <Block middle>
@@ -229,5 +230,22 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     marginVertical: 5
+  },
+  modal: {
+    height: height * (3 / 5),
+    width: width * (6 / 7),
+    backgroundColor: 'white',
+    borderRadius: 20,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  textInput: {
+    width: 250,
+    height: 40,
+    borderRadius: 10,
+    borderWidth: 0.6,
+    marginHorizontal: 20,
+    paddingHorizontal: 10,
+    borderColor: 'rgba(0,0,0,0.8)'
   }
 })
