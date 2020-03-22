@@ -84,7 +84,7 @@ export default function MyEvents({ navigation }) {
             onBackdropPress={() => setModalVisibility(false)}
             animationInTiming={700}
             animationOutTiming={700}
-
+            avoidKeyboard={true}
          >
             <Block middle>
                <View style={styles.modal}>
