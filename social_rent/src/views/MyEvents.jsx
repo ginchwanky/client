@@ -1,49 +1,50 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux'
 import {
    StyleSheet,
    View,
-   Image,
-   ScrollView,
-   TouchableOpacity,
-   Text,
    ImageBackground,
-   Dimensions
+   TouchableOpacity,
+   Dimensions,
+   ScrollView
 } from 'react-native'
-
 import {
-   Block
+   Text,
+   Block,
+   theme
 } from 'galio-framework'
-import Constants from 'expo-constants';
+import Constants from 'expo-constants'
 
-import EventCard from '../components/EventCard'
-import { useSelector } from 'react-redux';
+import MyEventsCard from '../components/MyEventsCard'
 
 const { width, height } = Dimensions.get("screen");
 
-export default function Home({ navigation, props }) {
-   const {
-      isLoading, isLogin, name, email, age, gender, bio, profilePicture
-   } = useSelector(state => state)
+
+export default function MyEvents({ navigation }) {
+
    return (
       <>
          <View style={styles.statusBar} />
          <ImageBackground
-            source={require('../../assets/bg-profile.jpeg')}
+            source={require('../../assets/bg.png')}
             style={styles.bgContainer}
             imageStyle={styles.background}
          >
             <ScrollView showsVerticalScrollIndicator={false}>
-            <Block middle>
-               <Text
-                  style={{ fontStyle: 'normal', marginTop: 20, marginBottom: 20, fontSize: 20, color: 'white', fontWeight: 'bold' }}
-               >Available events
+               <Block middle>
+                  <Text
+                     style={{ fontStyle: 'normal', marginTop: 20, marginBottom: 20, fontSize: 20, color: 'white', fontWeight: 'bold' }}
+                  >My Events
                </Text>
                </Block>
                <View style={styles.container}>
-                  <EventCard navigation={navigation} />
-                  <EventCard navigation={navigation} />
-                  <EventCard navigation={navigation} />
-                  <EventCard navigation={navigation} />
+
+                  <MyEventsCard navigation={navigation} />
+                  <MyEventsCard navigation={navigation} />
+                  <MyEventsCard navigation={navigation} />
+                  <MyEventsCard navigation={navigation} />
+                  <MyEventsCard navigation={navigation} />
+                  
 
 
                </View>
@@ -62,7 +63,7 @@ const styles = StyleSheet.create({
       borderRadius: 15,
       marginHorizontal: 10,
       paddingTop: 10,
-      paddingBottom: 80
+      paddingBottom: 10
    },
    test: {
       fontSize: 20,
@@ -80,6 +81,6 @@ const styles = StyleSheet.create({
    },
    background: {
       width: width,
-      height: height / 2
+      height: height 
    }
 })

@@ -142,6 +142,7 @@ export default function Profile({ navigation }) {
                     <Button
                       title="my events"
                       color="#2E71DC"
+                      onPress={() => navigation.navigate('My Events')}
                     />
                   </Block>
                   {/* disini loop recents events */}

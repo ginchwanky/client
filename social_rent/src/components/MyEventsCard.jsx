@@ -8,14 +8,15 @@ import {
 } from 'react-native'
 import {
    Text,
+   Block,
    theme
 } from 'galio-framework'
 
-export default function EventCard(props) {
+export default function MyEventCard(props) {
 
    return (
       <>
-         <TouchableOpacity onPress={() => props.navigation.navigate('Event Detail')}>
+         <TouchableOpacity onPress={() => {props.navigation.navigate('My Event Detail')}}>
             <View style={{
                marginTop: 10, marginBottom: 20, shadowOpacity: 0.8, shadowRadius: 2
             }}>
@@ -27,21 +28,9 @@ export default function EventCard(props) {
                   style={{ borderRadius: 20 }}
                />
                <View style={{ marginTop: 10, marginHorizontal: 5, flexDirection: 'row' }}>
-                  <TouchableOpacity onPress={() => props.navigation.navigate('People Profile')}>
-                     <Image
-                        source={{
-                           uri: 'https://m.media-amazon.com/images/I/71yspNc9hqL._SS500_.jpg',
-                           height: 40, width: 40, borderRadius: 100
-                        }}
-                        style={{ borderRadius: 20 }}
-                     />
-                  </TouchableOpacity>
-                  <View style={{ marginHorizontal: 10, width: 200 }}>
-                     <Text style={{ marginTop: 0, fontWeight: 'bold', fontStyle: 'italic' }}>Niki prakoso</Text>
-                     {
-                        /* nanti pakai cuma beberapa character description terus kasih titik tiga(...) */}
-                     <Text muted >Judul Event</Text>
-                     <Text muted >Ini adalah deskripsi dari event...</Text>
+                  <View style={{ marginHorizontal: 10, width: 250 }}>
+                     <Text muted style={{ marginTop: 0, fontWeight: 'bold', fontStyle: 'italic', fontSize: 20 }}>Kondangan</Text>
+                     <Text muted style={{ color: 'grey', marginTop: 5 }}>Ini adalah deskripsi dari event. sasasasjkajskajs ini bertujuan untuk bla bla</Text>
                   </View>
                </View>
             </View>
