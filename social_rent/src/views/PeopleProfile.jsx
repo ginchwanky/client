@@ -21,7 +21,9 @@ import EventHistoryCard from '../components/EventHistoryCard'
 const { width, height } = Dimensions.get("screen");
 
 export default function PeopleProfile({ route }) {
-  const [Events, setEvents] = useState([]);
+  const [EventsApplied, setEventsApplied] = useState([]);
+  const [EventsCreated, setEventsCreated] = useState([]);
+  const [Hired, setHired] = useState(0);
   const { data } = route.params
 
   let profilePic = <Image
@@ -37,8 +39,30 @@ export default function PeopleProfile({ route }) {
   }
 
   useEffect(() => {
-    // axiosInstance.get('/userEvent')
+    axiosInstance.get(`/userEvent/history/${data.id}`)
+      .then(({ data }) => {
+        setEventsApplied(data)
+      })
+      .catch(err => {
+        console.log(err, `INI ERRORRRRR`);
+      })
+
+      axiosInstance.get(`/events/history/${data.id}`)
+        .then(({data}) => {
+          setEventsCreated(data)
+        })
+        .catch(err => {
+          console.log(err, `INI ERROR HISTORY EVENT CREATED GET DI USEEFFECT`);
+          
+        })
   }, [])
+
+  let EventsHistoryMap = <Text muted>this user never applied in an event</Text>
+  if (EventsApplied.length > 0) {
+    EventsHistoryMap = (EventsApplied.map((data, i) => <EventHistoryCard data={data} key={i} />))
+  }
+
+
 
   return (
     <>
@@ -46,7 +70,6 @@ export default function PeopleProfile({ route }) {
       <Block flex style={styles.profile}>
         <Block flex>
           <ImageBackground
-            // source={require('../../assets/bg.png')}
             source={{ uri: 'https://c0.wallpaperflare.com/preview/424/107/611/black-camera.jpg' }}
             style={styles.profileContainer}
             imageStyle={styles.profileBackground}
@@ -75,17 +98,21 @@ export default function PeopleProfile({ route }) {
                     />
                   </Block>
                   <Block row space="between">
-                    <Block middle>
+                    {/* <Block middle>
                       <Text
                         bold
                         size={18}
                         color="#525F7F"
                         style={{ marginBottom: 4 }}
                       >
-                        10
+                        {Hired}
                       </Text>
                       <Text size={12} color='grey'>Hired</Text>
-                    </Block>
+                    </Block> */}
+
+                    {/* NYALAIN LAGI SETELAH NAMBAH HIRED PROPERTY APPLICANT DI USER */}
+
+
                     <Block middle>
                       <Text
                         bold
@@ -93,7 +120,7 @@ export default function PeopleProfile({ route }) {
                         color="#525F7F"
                         style={{ marginBottom: 4 }}
                       >
-                        3
+                        {EventsCreated.length}
                       </Text>
                       <Text size={12} color='grey'>Events created</Text>
                     </Block>
@@ -104,7 +131,7 @@ export default function PeopleProfile({ route }) {
                         size={18}
                         style={{ marginBottom: 4 }}
                       >
-                        15
+                        {EventsApplied.length}
                       </Text>
                       <Text size={12} color='grey'>Applied</Text>
                     </Block>
@@ -138,12 +165,11 @@ export default function PeopleProfile({ route }) {
                     style={{ paddingVertical: 14, alignItems: "baseline" }}
                   >
                     <Text bold size={16} color="#525F7F">
-                      Events History
+                      Recent events applied
                     </Text>
                   </Block>
 
-                  {/* disini loop events history */}
-                  <EventHistoryCard />
+                  {EventsHistoryMap}
 
                 </Block>
               </Block>
@@ -185,7 +211,8 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 0 },
     shadowRadius: 8,
     shadowOpacity: 0.2,
-    zIndex: 2
+    zIndex: 2,
+    paddingBottom: 50
   },
   info: {
     paddingHorizontal: 40

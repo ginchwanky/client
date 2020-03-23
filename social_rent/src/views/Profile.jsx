@@ -147,9 +147,9 @@ export default function Profile({ navigation }) {
                     />
                   </Block>
                   {/* disini loop recents events */}
+                  {/* <EventHistoryCard />
                   <EventHistoryCard />
-                  <EventHistoryCard />
-                  <EventHistoryCard />
+                  <EventHistoryCard /> */}
 
                   <Block middle style={{ marginTop: 30, marginBottom: 60 }}>
                     <Block style={styles.divider} />

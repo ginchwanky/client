@@ -11,6 +11,10 @@ import { Text, Block, theme } from 'galio-framework'
 
 export default function EventHistoryCard(props) {
 
+   const { Event, User, statusApplicant } = props.data
+
+   let status = 'pending'
+   if (statusApplicant) status = 'accepted'
    return (
       <>
          <Block middle>
@@ -27,10 +31,10 @@ export default function EventHistoryCard(props) {
                      }}
                      style={{ borderRadius: 10 }}
                   />
-                  <Block left style={{marginLeft: 10, width: 180}}>
-                     <Text size={15} style={{fontWeight: 'bold', marginBottom: 5}}>kondangan</Text>
-                     <Text muted>ini adalah sedikit deskripsi dari event yang ada disini</Text>
-                     <Text muted italic size={14}>Status: complete</Text>
+                  <Block left style={{ marginLeft: 10, width: 180 }}>
+                     <Text size={15} style={{ fontWeight: 'bold', marginBottom: 5 }}>{Event.name}</Text>
+                     <Text muted>{Event.description.slice(0, 40)}...</Text>
+                     <Text muted italic size={14}>Status: {status}</Text>
                   </Block>
                </Block>
             </Block>
