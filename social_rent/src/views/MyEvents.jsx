@@ -28,10 +28,11 @@ const { width, height } = Dimensions.get("screen");
 
 export default function MyEvents({ navigation }) {
    const [ModalVisibility, setModalVisibility] = useState(false);
-   const [name, setname] = useState('');
-   const [desc, setdesc] = useState('');
-   const [date, setdate] = useState(null);
-   const [numOfRent, setnumOfRent] = useState(0);
+   const [Name, setName] = useState('');
+   const [Desc, setDesc] = useState('');
+   const [Date, setDate] = useState(null);
+   const [Location, setLocation] = useState('');
+   const [NumOfRent, setNumOfRent] = useState(0);
 
 
    let dataDropdown = [{
@@ -51,6 +52,16 @@ export default function MyEvents({ navigation }) {
             style={styles.bgContainer}
             imageStyle={styles.background}
          >
+            <Button
+               onlyIcon
+               icon="plus"
+               iconFamily="antdesign"
+               iconSize={30}
+               color="#2E71DC"
+               iconColor="#fff"
+               style={styles.btn}
+               onPress={() => setModalVisibility(true)}
+            />
             <ScrollView showsVerticalScrollIndicator={false}>
                <Block middle>
                   <Text
@@ -59,16 +70,7 @@ export default function MyEvents({ navigation }) {
                </Text>
                </Block>
                <View style={styles.container}>
-                  <Button
-                     onlyIcon
-                     icon="plus"
-                     iconFamily="antdesign"
-                     iconSize={30}
-                     color="#2E71DC"
-                     iconColor="#fff"
-                     style={{ width: 40, height: 40, marginVertical: 10 }}
-                     onPress={() => setModalVisibility(true)}
-                  />
+
                   {/* Disini mapMyEventsCard jangan lupa pprops nya */}
                   <MyEventsCard navigation={navigation} />
                   <MyEventsCard navigation={navigation} />
@@ -86,20 +88,28 @@ export default function MyEvents({ navigation }) {
             animationOutTiming={700}
             avoidKeyboard={true}
          >
-            <Block middle>
+             <Block middle>
                <View style={styles.modal}>
                   <Text h5 bold italic style={{ marginBottom: 20 }}>Create new event</Text>
                   <Input
                      style={styles.textInput}
                      placeholder='name of event'
-                     onChangeText={(value) => setname(value)} />
+                     value={Name}
+                     onChangeText={(value) => setName(value)} />
                   <Input
                      style={styles.textInput}
                      placeholder='event description'
-                     onChangeText={(value) => setdesc(value)}
+                     value={Desc}
+                     onChangeText={(value) => setDesc(value)}
+                  />
+                  <Input
+                     style={styles.textInput}
+                     placeholder='event location'
+                     value={Location}
+                     onChangeText={(value) => setLocation(value)}
                   />
                   <DatePicker
-                     date={date}
+                     date={Date}
                      mode="date"
                      placeholder="select date"
                      format="YYYY-MM-DD"
@@ -120,16 +130,16 @@ export default function MyEvents({ navigation }) {
                         // ... You can check the source to find the other keys.
                      }}
                      style={{ ...styles.textInput, borderWidth: 0, marginTop: 10 }}
-                     onDateChange={(date) => setdate(date)}
+                     onDateChange={(date) => setDate(date)}
                   />
                   <Dropdown
                      label='Number of people'
                      data={dataDropdown}
                      containerStyle={{ width: 200 }}
-                     onChangeText={(value) => setnumOfRent(value)}
+                     onChangeText={(value) => setNumOfRent(value)}
                   />
                   <TouchableOpacity
-                     style={{ marginTop: 50 }}
+                     style={{ marginTop: 30 }}
                      onPress={() => { }}>
                      <Block
                         middle
@@ -189,5 +199,14 @@ const styles = StyleSheet.create({
       marginHorizontal: 20,
       paddingHorizontal: 10,
       borderColor: 'rgba(0,0,0,0.8)'
+   },
+   btn: {
+      width: 50,
+      height: 50,
+      marginVertical: 10,
+      zIndex: 1,
+      position: 'absolute',
+      bottom: 50,
+      right: 20
    }
 })
