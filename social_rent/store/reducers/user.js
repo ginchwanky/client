@@ -1,4 +1,4 @@
-import { SUCCESS_REGISTER, SUCCESS_LOGIN, LOGOUT } from "../actionTypes"
+import { SUCCESS_REGISTER, SUCCESS_LOGIN, LOGOUT, EMPTY_INPUT } from "../actionTypes"
 
 const initialState = {
     isLoading: true,

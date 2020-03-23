@@ -17,6 +17,7 @@ import {
 } from 'galio-framework'
 import Constants from 'expo-constants'
 import Modal from 'react-native-modal';
+import { useSelector, useDispatch } from 'react-redux'
 
 import EventHistoryCard from '../components/EventHistoryCard'
 
@@ -24,6 +25,23 @@ const { width, height } = Dimensions.get("screen");
 
 export default function Profile({ navigation }) {
 
+  const name = (useSelector(state => state.user.name))
+  const age = (useSelector(state => state.user.age))
+  const bio = (useSelector(state => state.user.bio))
+  const profilePicture = (useSelector(state => state.user.profilePicture))
+  const access_token = (useSelector(state => state.user.access_token))
+
+  let profilePic = <Image
+    source={{ uri: 'https://cdnph.upi.com/svc/sv/upi/8631478538164/2016/1/a42cfe55775589649bbb7ea457a45e24/New-Childish-Gambino-album-titled-Awaken-My-Love-found-listed-on-Amazon.jpg' }}
+    style={styles.avatar}
+  />
+
+  if (profilePicture) {
+    profilePic = <Image
+      source={{ uri: `${profilePicture}` }}
+      style={styles.avatar}
+    />
+  }
 
   let dataDropdown = [{
     value: 'male',
@@ -31,6 +49,9 @@ export default function Profile({ navigation }) {
     value: 'female',
   }]
 
+  useEffect(() => {
+    // DIA NANTI BAKAL NGE FETCH BUAT NGISI EVENT CREATED APPLIED HIRED
+  }, [])
 
   return (
     <>
@@ -39,21 +60,18 @@ export default function Profile({ navigation }) {
         <Block flex>
           <ImageBackground
             // source={require('../../assets/bg.png')}
-            source={{uri: 'https://c0.wallpaperflare.com/preview/424/107/611/black-camera.jpg'}}
+            source={{ uri: 'https://c0.wallpaperflare.com/preview/424/107/611/black-camera.jpg' }}
             style={styles.profileContainer}
             imageStyle={styles.profileBackground}
           >
             <ScrollView
               showsVerticalScrollIndicator={false}
-              style={{ width}}
+              style={{ width }}
             >
 
               <Block flex style={styles.profileCard}>
                 <Block middle style={styles.avatarContainer}>
-                  <Image
-                    source={{ uri: 'https://cdnph.upi.com/svc/sv/upi/8631478538164/2016/1/a42cfe55775589649bbb7ea457a45e24/New-Childish-Gambino-album-titled-Awaken-My-Love-found-listed-on-Amazon.jpg' }}
-                    style={styles.avatar}
-                  />
+                  {profilePic}
                 </Block>
 
                 <Block style={styles.info}>
@@ -110,7 +128,7 @@ export default function Profile({ navigation }) {
                 <Block flex>
                   <Block middle style={styles.nameInfo}>
                     <Text bold size={28} color="#32325D">
-                      Gambino, 24
+                      {name}, {age}
                     </Text>
                     <Text size={16} color="#32325D" style={{ marginTop: 10 }}>
                       New York, USA
