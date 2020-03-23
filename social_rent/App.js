@@ -11,7 +11,11 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Provider } from 'react-redux'
 import store from './store/index'
 
-// import Coba2 from './src/views/Coba2'
+import testLandingPage from './src/views/testLandingPage'
+import testLoginPage from './src/views/testLoginPage'
+import testRegisterPage from './src/views/testRegisterPage'
+
+import Coba2 from './src/views/Coba2'
 import Coba from './src/views/Coba'
 import Home from './src/views/Home'
 import Profile from './src/views/Profile'
@@ -54,8 +58,12 @@ export default function App() {
             headerShown: false
           }}
         >
-          <Stack.Screen name='Landing Page' component={Coba} />
+          {/* <Stack.Screen name='Landing Page' component={Coba2} /> */}
           {/* <Stack.Screen name='Register' component={Coba2} /> */}
+          <Stack.Screen name='Landing Page' component={testLandingPage} />
+          <Stack.Screen name='Login Page' component={testLoginPage} />
+          <Stack.Screen name='Register Page' component={testRegisterPage} />
+
           <Stack.Screen name='Home' component={HomeScreen} />
           <Stack.Screen name='Profile' component={Profile} />
           <Stack.Screen name='Event Detail' component={EventDetail} />

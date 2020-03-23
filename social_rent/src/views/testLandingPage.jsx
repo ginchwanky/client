@@ -72,12 +72,8 @@ class Login extends Component {
     super(props)
 
     this.state = {
-      name: '',
       email: '',
-      password: '',
-      age: null,
-      gender: '',
-      bio: ''
+      password: ''
     }
 
     this.buttonOpacity = new Value(1);
@@ -114,7 +110,7 @@ class Login extends Component {
 
     this.bgY = interpolate(this.buttonOpacity, {
       inputRange: [0, 1],
-      outputRange: [-(2 / 3) * height, 0],
+      outputRange: [-(2/3) * height, 0],
       extrapolate: Extrapolate.CLAMP
     });
 
@@ -180,9 +176,9 @@ class Login extends Component {
               style={{ flex: 1, height: null, width: null }}
             />
           </Animated.View>
-          <View style={{ height: (1 / 3) * height, justifyContent: 'center' }}>
+          <View style={{ height: (1/3) * height, justifyContent: 'center' }}>
             <TouchableOpacity>
-              <TapGestureHandler >
+              <TapGestureHandler onHandlerStateChange={this.onStateChange}>
                 <Animated.View
                   style={{
                     ...styles.button,
@@ -198,20 +194,18 @@ class Login extends Component {
             </TouchableOpacity>
 
             <TouchableOpacity>
-              <TapGestureHandler onHandlerStateChange={this.onStateChange}>
-                <Animated.View
-                  style={{
-                    ...styles.button,
-                    backgroundColor: '#2E71DC',
-                    opacity: this.buttonOpacity,
-                    transform: [{ translateY: this.buttonY }]
-                  }}
-                >
-                  <Text style={{ fontSize: 20, fontWeight: 'bold', color: 'white' }}>
-                    REGISTER
+              <Animated.View
+                style={{
+                  ...styles.button,
+                  backgroundColor: '#2E71DC',
+                  opacity: this.buttonOpacity,
+                  transform: [{ translateY: this.buttonY }]
+                }}
+              >
+                <Text style={{ fontSize: 20, fontWeight: 'bold', color: 'white' }}>
+                  REGISTER
             </Text>
-                </Animated.View>
-              </TapGestureHandler>
+              </Animated.View>
             </TouchableOpacity>
             <Animated.View
               style={{
@@ -220,7 +214,7 @@ class Login extends Component {
                 zIndex: this.textInputZindex,
                 opacity: this.textInputOpacity,
                 transform: [{ translateY: this.textInputY }],
-                height: (2 / 3) * height,
+                height: (2/3) * height,
                 ...StyleSheet.absoluteFill,
                 top: null,
                 justifyContent: 'center'
@@ -233,45 +227,21 @@ class Login extends Component {
               </Animated.Text>
                 </Animated.View>
               </TapGestureHandler>
-              <Block middle style={{ marginTop: 50 }}>
-                <Input
-                  placeholder="Name"
-                  style={styles.textInput}
-                  value={this.state.name}
-                  onChangeText={(name) => { this.setState({ name }) }}
-                />
-                <Input
-                  placeholder="Email"
-                  style={styles.textInput}
-                  value={this.state.email}
-                  onChangeText={(email) => { this.setState({ email }) }}
-                />
-                <Input
-                  placeholder="Password"
-                  password
-                  viewPass
-                  style={styles.textInput}
-                  value={this.state.password}
-                  onChangeText={(password) => { this.setState({ password }) }}
-                />
-                <Input
-                  placeholder="Age"
-                  style={styles.textInput}
-                  value={this.state.age}
-                  onChangeText={(age) => { this.setState({ age }) }}
-                />
-                <Input
-                  placeholder="Gender"
-                  style={styles.textInput}
-                  value={this.state.gender}
-                  onChangeText={(gender) => { this.setState({ gender }) }}
-                />
-                <Input
-                  placeholder="Bio"
-                  style={styles.textInput}
-                  value={this.state.bio}
-                  onChangeText={(bio) => { this.setState({ bio }) }}
-                />
+              <Block middle style={{marginTop: 50}}>
+              <Input
+                placeholder="Email"
+                style={styles.textInput}
+                value={this.state.email}
+                onChangeText={(email) => { this.setState({ email }) }}
+              />
+              <Input 
+                placeholder="Password" 
+                password 
+                viewPass
+                style={styles.textInput}
+                value={this.state.password}
+                onChangeText={(password) => { this.setState({ password }) }}
+              />
               </Block>
               <TouchableOpacity onPress={this.loginHit}>
                 <Animated.View style={styles.button} >
