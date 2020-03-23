@@ -180,7 +180,7 @@ class Login extends Component {
                                 transform: [{ translateY: this.bgY }]
                             }}>
                             <Image
-                                source={require('../../assets/login-bg.jpg')}
+                                source={require('../../assets/bg-profile.jpeg')}
                                 style={{ flex: 1, height: null, width: null }}
                             />
                         </Animated.View>
