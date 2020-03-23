@@ -17,15 +17,37 @@ import {
 } from 'galio-framework'
 import Constants from 'expo-constants'
 import Modal from 'react-native-modal';
+import axiosInstance from '../instances/axiosInstance'
 
 
 const { width, height } = Dimensions.get('screen')
 
 export default function MyEventDetail({ route, navigation }) {
+   const { id } = route.params
+
+   const [Data, setData] = useState([]);
    const [ModalVisibility, setModalVisibility] = useState(false);
    const [payment, setpayment] = useState(null);
    const [notes, setnotes] = useState('');
 
+   useEffect(() => {
+      axiosInstance.get(`/events/${id}`)
+         .then(({ data }) => {
+            setData(data)
+         })
+         .catch(err => {
+            console.log(err, `ERRRORRRRRRRRRRR`);
+         })
+   }, []);
+
+   if (!Data.event) {
+      // NANTI LOADING DISINI
+      return (
+         <>
+            <View></View>
+         </>
+      )
+   }
 
    return (
       <>
@@ -35,18 +57,20 @@ export default function MyEventDetail({ route, navigation }) {
             style={styles.profileContainer}
             imageStyle={styles.profileBackground}
          >
-            <Block style={styles.eventConatainer}>
-               <ScrollView>
+            <ScrollView>
+               <Block style={styles.eventConatainer}>
                   <Block middle flex>
-                     <Text h3 bold style={{ marginTop: 20 }}>Kondangan</Text>
-                     <Text muted center style={{ marginHorizontal: 20, marginVertical: 10 }}>Hai i don't have that many friends to ask in order to accompanying me to one of my friends wedding. so can you pretend to be my gf atm?</Text>
-                     <Text p muted size={15}>Date: 2020-03-27</Text>
+                     <Text h3 bold style={{ marginTop: 20 }}>{Data.event.name}</Text>
+                     <Text muted center style={{ marginHorizontal: 20, marginVertical: 10 }}>{Data.event.description}</Text>
+                     <Text p muted size={15}>Location: {Data.event.location}</Text>
+                     <Text p muted size={15}>Date: {Data.event.date}</Text>
                      <Text p muted bold size={15}>Status: Pending</Text>
                      <View style={styles.divider} />
                      <Text bold size={15} color="#525F7F">
                         wanna go out with me?
                     </Text>
-                     <TouchableOpacity onPress={() => navigation.navigate('People Profile')}>
+                     <TouchableOpacity
+                        onPress={() => navigation.navigate('People Profile', { data: Data.creator })}>
                         <Image
                            source={{
                               uri: 'https://m.media-amazon.com/images/I/71yspNc9hqL._SS500_.jpg',
@@ -55,7 +79,7 @@ export default function MyEventDetail({ route, navigation }) {
                            style={{ borderRadius: 100, marginTop: 10, marginBottom: 10 }}
                         />
                      </TouchableOpacity>
-                     <Text italic muted>created by: Niki Prakoso</Text>
+                     <Text italic muted>created by: {Data.creator.name}</Text>
                      <Button
                         round
                         uppercase
@@ -64,8 +88,8 @@ export default function MyEventDetail({ route, navigation }) {
                         onPress={() => setModalVisibility(true)}
                      >Sign me in!</Button>
                   </Block>
-               </ScrollView>
-            </Block>
+               </Block>
+            </ScrollView>
          </ImageBackground>
 
          {/* ini modal */}
@@ -121,11 +145,11 @@ const styles = StyleSheet.create({
    },
    eventConatainer: {
       width: width,
-      height: height,
       backgroundColor: 'white',
       borderTopLeftRadius: 30,
       borderTopRightRadius: 30,
-      marginTop: 250
+      marginTop: 250,
+      paddingBottom: 50
    },
    divider: {
       width: "90%",

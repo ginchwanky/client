@@ -7,7 +7,7 @@ register user
 
 * **URL**
 
-  /user/register
+  /users/register
 
 * **Method:**
 
@@ -51,7 +51,7 @@ login user
 
 * **URL**
 
-  /user/login
+  /users/login
 
 * **Method:**
 

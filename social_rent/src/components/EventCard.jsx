@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
    StyleSheet,
    View,
@@ -8,26 +8,30 @@ import {
 } from 'react-native'
 import {
    Text,
-   theme
+   theme,
+   Block
 } from 'galio-framework'
+import axiosInstance from '../instances/axiosInstance'
 
 export default function EventCard(props) {
+   const {id, location, name, numOfRent, statusEvent, date, description} = props.data
 
    return (
+      // NANTI KALO DIA ADD EVENT YANG DIA BUAT MAKA REDIRECT KE MY EVENT DETAIL
       <>
-         <TouchableOpacity onPress={() => props.navigation.navigate('Event Detail')}>
+         <TouchableOpacity onPress={() => props.navigation.navigate('Event Detail', {id})}>
             <View style={{
                marginTop: 10, marginBottom: 20, shadowOpacity: 0.8, shadowRadius: 2
             }}>
                <Image
                   source={{
                      uri: 'https://thoughtcatalog.files.wordpress.com/2016/08/bffs-2.jpg?w=1140&h=760',
-                     height: 150, width: 300, borderRadius: 25
+                     height: 150, width: 300
                   }}
-                  style={{ borderRadius: 20 }}
+                  style={{ borderRadius: 15 }}
                />
-               <View style={{ marginTop: 10, marginHorizontal: 5, flexDirection: 'row' }}>
-                  <TouchableOpacity onPress={() => props.navigation.navigate('People Profile')}>
+               <Block middle style={{ marginTop: 10, marginHorizontal: 5, flexDirection: 'row' }}>
+                  {/* <TouchableOpacity onPress={() => props.navigation.navigate('People Profile')}>
                      <Image
                         source={{
                            uri: 'https://m.media-amazon.com/images/I/71yspNc9hqL._SS500_.jpg',
@@ -35,15 +39,12 @@ export default function EventCard(props) {
                         }}
                         style={{ borderRadius: 100 }}
                      />
-                  </TouchableOpacity>
-                  <View style={{ marginHorizontal: 10, width: 200 }}>
-                     <Text style={{ marginTop: 0, fontWeight: 'bold', fontStyle: 'italic' }}>Niki prakoso</Text>
-                     {
-                        /* nanti pakai cuma beberapa character description terus kasih titik tiga(...) */}
-                     <Text muted >Judul Event</Text>
-                     <Text muted >Ini adalah deskripsi dari event...</Text>
-                  </View>
-               </View>
+                  </TouchableOpacity> */}
+                  <Block middle style={{ marginHorizontal: 0, width: 250 }}>
+                     <Text center bold>{name}</Text>
+                     <Text muted center>{description.slice(0, 70)}...</Text>
+                  </Block>
+               </Block>
             </View>
          </TouchableOpacity>
       </>
