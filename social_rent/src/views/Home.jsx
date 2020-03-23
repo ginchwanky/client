@@ -6,7 +6,8 @@ import {
    ScrollView,
    TouchableOpacity,
    ImageBackground,
-   Dimensions
+   Dimensions,
+   Alert
 } from 'react-native'
 
 import {
@@ -20,6 +21,8 @@ import Constants from 'expo-constants';
 import Modal from 'react-native-modal';
 import DatePicker from 'react-native-datepicker'
 import { Dropdown } from 'react-native-material-dropdown';
+
+import axiosInstance from '../instances/axiosInstance'
 
 import EventCard from '../components/EventCard'
 import { useSelector } from 'react-redux';
@@ -37,7 +40,7 @@ export default function Home({ navigation, props }) {
    const [Date, setDate] = useState(null);
    const [Location, setLocation] = useState('');
    const [NumOfRent, setNumOfRent] = useState(0);
-
+   const [Data, setData] = useState([]);
 
    let dataDropdown = [{
       value: 1,
@@ -49,12 +52,29 @@ export default function Home({ navigation, props }) {
       value: 4
    }]
 
+   useEffect(() => {
+      axiosInstance({
+         method: 'get',
+         url: '/events'
+      })
+         .then(({ data }) => {
+            setData(data)
+         })
+         .catch(err => {
+            console.log(err);
+         })
+   }, []);
+
+   let DataMap = <Text style={{ marginBottom: 15, marginTop: 10 }}>No current event available</Text>
+   if (Data.length > 0) {
+      DataMap = (Data.map(data => <EventCard navigation={navigation} data={data} key={data.id}/>)) 
+   }
+
    return (
       <>
          <View style={styles.statusBar} />
          <ImageBackground
             source={require('../../assets/bg-profile.jpeg')}
-            // source={{uri: 'https://c0.wallpaperflare.com/preview/424/107/611/black-camera.jpg'}}
             style={styles.bgContainer}
             imageStyle={styles.background}
          >
@@ -76,10 +96,9 @@ export default function Home({ navigation, props }) {
                </Text>
                </Block>
                <View style={styles.container}>
-                  <EventCard navigation={navigation} />
-                  <EventCard navigation={navigation} />
-                  <EventCard navigation={navigation} />
-                  {/* <EventCard navigation={navigation} /> */}
+
+                  {DataMap}
+
                </View>
             </ScrollView>
          </ImageBackground>
@@ -164,7 +183,7 @@ const styles = StyleSheet.create({
       alignItems: 'center',
       justifyContent: 'center',
       borderRadius: 25,
-      marginHorizontal: 10,
+      marginHorizontal: 15,
       paddingTop: 10,
       marginBottom: 80
    },

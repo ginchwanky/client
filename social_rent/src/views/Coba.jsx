@@ -110,7 +110,7 @@ class Login extends Component {
 
     this.bgY = interpolate(this.buttonOpacity, {
       inputRange: [0, 1],
-      outputRange: [-(2/3) * height, 0],
+      outputRange: [-(1/3) * height, 0],
       extrapolate: Extrapolate.CLAMP
     });
 
@@ -214,7 +214,7 @@ class Login extends Component {
                 zIndex: this.textInputZindex,
                 opacity: this.textInputOpacity,
                 transform: [{ translateY: this.textInputY }],
-                height: (2/3) * height,
+                height: (1/3) * height,
                 ...StyleSheet.absoluteFill,
                 top: null,
                 justifyContent: 'center'
