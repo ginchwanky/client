@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   StyleSheet,
   View,
@@ -14,12 +14,31 @@ import {
   theme
 } from 'galio-framework'
 import Constants from 'expo-constants'
+import axiosInstance from '../instances/axiosInstance'
 
 import EventHistoryCard from '../components/EventHistoryCard'
 
 const { width, height } = Dimensions.get("screen");
 
-export default function Profile({ navigation }) {
+export default function PeopleProfile({ route }) {
+  const [Events, setEvents] = useState([]);
+  const { data } = route.params
+
+  let profilePic = <Image
+    source={{ uri: 'https://m.media-amazon.com/images/I/71yspNc9hqL._SS500_.jpg' }}
+    style={styles.avatar}
+  />
+
+  if (data.profilePicture) {
+    profilePic = <Image
+      source={{ uri: `${data.profilePicture}` }}
+      style={styles.avatar}
+    />
+  }
+
+  useEffect(() => {
+    // axiosInstance.get('/userEvent')
+  }, [])
 
   return (
     <>
@@ -28,7 +47,7 @@ export default function Profile({ navigation }) {
         <Block flex>
           <ImageBackground
             // source={require('../../assets/bg.png')}
-            source={{uri: 'https://c0.wallpaperflare.com/preview/424/107/611/black-camera.jpg'}}
+            source={{ uri: 'https://c0.wallpaperflare.com/preview/424/107/611/black-camera.jpg' }}
             style={styles.profileContainer}
             imageStyle={styles.profileBackground}
           >
@@ -40,10 +59,7 @@ export default function Profile({ navigation }) {
               <Block flex style={styles.profileCard}>
 
                 <Block middle style={styles.avatarContainer}>
-                  <Image
-                    source={{ uri: 'https://m.media-amazon.com/images/I/71yspNc9hqL._SS500_.jpg' }}
-                    style={styles.avatar}
-                  />
+                  {profilePic}
                 </Block>
 
                 <Block style={styles.info}>
@@ -53,10 +69,10 @@ export default function Profile({ navigation }) {
                     space="evenly"
                     style={{ marginTop: 20, paddingBottom: 24 }}
                   >
-                      <Button
-                        title="Send Message"
-                        color="#2E71DC"
-                      />
+                    <Button
+                      title="Send Message"
+                      color="#2E71DC"
+                    />
                   </Block>
                   <Block row space="between">
                     <Block middle>
@@ -99,7 +115,7 @@ export default function Profile({ navigation }) {
                 <Block flex>
                   <Block middle style={styles.nameInfo}>
                     <Text bold size={28} color="#32325D">
-                      Niki Prakoso, 17
+                      {data.name}, {data.age}
                     </Text>
                     <Text size={16} color="#32325D" style={{ marginTop: 10 }}>
                       Jakarta, Indonesia
@@ -114,7 +130,7 @@ export default function Profile({ navigation }) {
                       color="#525F7F"
                       style={{ textAlign: "center" }}
                     >
-                      Hi nice to meet you, let's be friends and going places!
+                      {data.bio}
                     </Text>
                   </Block>
                   <Block
@@ -125,7 +141,7 @@ export default function Profile({ navigation }) {
                       Events History
                     </Text>
                   </Block>
-                 
+
                   {/* disini loop events history */}
                   <EventHistoryCard />
 
