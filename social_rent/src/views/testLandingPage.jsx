@@ -139,10 +139,11 @@ class Login extends Component {
         });
 
         this.loginHit = () => {
-            // untuk nge hit ke server saat login
-            console.log('ke hit nih');
+            props.navigation.navigate('Transition Login', {
+                email: this.state.email,
+                password: this.state.password
+            })
             this.onCloseState
-            props.navigation.navigate('Home')
         }
 
         this.toRegisterPage = () => {
