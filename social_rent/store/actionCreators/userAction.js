@@ -7,6 +7,7 @@ import {
     FAILED_LOGIN
 } from '../actionTypes'
 import axios from 'axios'
+
 import { setAccessToken } from '../../utilities/accesstoken'
 
 export const emptyInput = () => {
@@ -75,20 +76,41 @@ export const register = (payload) => {
     }
 }
 
-export const login = (payload) => async dispatch => {
-    try {
-        if (!payload.email || !payload.password) {
-            dispatch(emptyInput)
-        } else {
-            const { data } = await axios({
-                url: `http://localhost:3000/users/login`,
-                method: 'POST',
-                data: payload
+// export const login = (payload) => async dispatch => {
+//     try {
+//         if (!payload.email || !payload.password) {
+//             dispatch(emptyInput)
+//         } else {
+//             const { data } = await axios({
+//                 url: `http://localhost:3000/users/login`,
+//                 method: 'POST',
+//                 data: payload
+//             })
+//             // setAccessToken(JSON.stringify(data))
+//             dispatch(successLogin(data))
+//         }
+//     } catch (error) {
+//         console.log(error)
+//     }
+// }
+
+export const login = (payload) => {
+    console.log('>>>>>>>>>>', payload)
+    // let newPayload = {
+    //     name: payload.newName,
+    //     email: payload.newEmail,
+    //     password: payload.newPassword,
+    //     age: payload.newAge,
+    //     gender: payload.newGender,
+    //     bio: payload.newBio
+    // }
+    return dispatch => {
+        axios
+            .post(`http://localhost:3000/users/login`, payload)
+            .then(({data}) => {
+                setAccessToken(JSON.stringify(data))
+                dispatch(successLogin(data))
             })
-            // setAccessToken(JSON.stringify(data))
-            dispatch(successLogin(data))
-        }
-    } catch (error) {
-        console.log(error)
+            .catch(console.log)
     }
 }

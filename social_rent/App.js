@@ -27,6 +27,7 @@ import BarcodeScanner from './src/views/BarcodeScanner'
 import MyEvents from './src/views/MyEvents'
 import MyEventDetail from './src/views/MyEventDetail'
 import TransitionRegister from './src/components/transitionRegister'
+import TransitionLogin from './src/components/transitionLogin'
 
 const Stack = createStackNavigator()
 const Tab = createBottomTabNavigator()
@@ -74,6 +75,7 @@ export default function App() {
           <Stack.Screen name='My Events' component={MyEvents} />
           <Stack.Screen name='My Event Detail' component={MyEventDetail} />
           <Stack.Screen name='Transition Register' component={TransitionRegister} />
+          <Stack.Screen name='Transition Login' component={TransitionLogin} />
 
 
         </Stack.Navigator>
