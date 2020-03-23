@@ -10,6 +10,7 @@ import {
     Alert,
     KeyboardAvoidingView
 } from 'react-native';
+import { Dropdown } from 'react-native-material-dropdown';
 import {
     Block,
     Input,
@@ -38,6 +39,7 @@ const {
     Extrapolate,
     concat
 } = Animated;
+
 
 function runTiming(clock, value, dest) {
     const state = {
@@ -143,11 +145,8 @@ class Login extends Component {
         });
 
         this.loginHit = () => {
-            // untuk nge hit ke server saat login
-            console.log('ke hit nih');
             this.onCloseState
             props.navigation.navigate('Home')
-
         }
     }
 
@@ -178,7 +177,17 @@ class Login extends Component {
                     </Animated.View>
                     <View style={{ height: height, justifyContent: 'center' }}>
                         <Animated.View
-                            >
+                            style={{
+                                // zIndex: -1,
+                                // opacity: 0,
+                                // zIndex: this.textInputZindex,
+                                // opacity: this.textInputOpacity,
+                                transform: [{ translateY: this.textInputY }],
+                                height: height,
+                                ...StyleSheet.absoluteFill,
+                                top: null,
+                                justifyContent: 'center'
+                            }}>
                             <Block middle style={{ marginTop: 50 }}>
                                 <Input
                                     placeholder="Name"
@@ -202,6 +211,7 @@ class Login extends Component {
                                 />
                                 <Input
                                     placeholder="Age"
+                                    type="numeric"
                                     style={styles.textInput}
                                     value={this.state.age}
                                     onChangeText={(age) => { this.setState({ age }) }}
@@ -212,6 +222,14 @@ class Login extends Component {
                                     value={this.state.gender}
                                     onChangeText={(gender) => { this.setState({ gender }) }}
                                 />
+                                {/* <Dropdown
+                                    // label='Number of people'
+                                    style={styles.textInput}
+                                    placeholder="Gender"
+                                    data={[{ value: "Male" }, { value: "Female" }]}
+                                    containerStyle={{ width: 200 }}
+                                    onChangeText={(gender) => { this.setState({ gender }) }}
+                                /> */}
                                 <Input
                                     placeholder="Bio"
                                     style={styles.textInput}
