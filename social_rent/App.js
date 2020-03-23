@@ -26,6 +26,7 @@ import GenerateBarcode from './src/views/GenerateBarcode'
 import BarcodeScanner from './src/views/BarcodeScanner'
 import MyEvents from './src/views/MyEvents'
 import MyEventDetail from './src/views/MyEventDetail'
+import TransitionRegister from './src/components/transitionRegister'
 
 const Stack = createStackNavigator()
 const Tab = createBottomTabNavigator()
@@ -61,7 +62,7 @@ export default function App() {
           {/* <Stack.Screen name='Landing Page' component={Coba2} /> */}
           {/* <Stack.Screen name='Register' component={Coba2} /> */}
           <Stack.Screen name='Landing Page' component={testLandingPage} />
-          <Stack.Screen name='Login Page' component={testLoginPage} />
+          {/* <Stack.Screen name='Login Page' component={testLoginPage} /> */}
           <Stack.Screen name='Register Page' component={testRegisterPage} />
 
           <Stack.Screen name='Home' component={HomeScreen} />
@@ -72,6 +73,8 @@ export default function App() {
           <Stack.Screen name='Barcode Scanner' component={BarcodeScanner} />
           <Stack.Screen name='My Events' component={MyEvents} />
           <Stack.Screen name='My Event Detail' component={MyEventDetail} />
+          <Stack.Screen name='Transition Register' component={TransitionRegister} />
+
 
         </Stack.Navigator>
       </NavigationContainer>

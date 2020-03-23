@@ -8,6 +8,7 @@ import {
     TextInput,
     TouchableOpacity,
     Alert,
+    ScrollView,
     KeyboardAvoidingView
 } from 'react-native';
 import { Dropdown } from 'react-native-material-dropdown';
@@ -145,8 +146,15 @@ class Login extends Component {
         });
 
         this.loginHit = () => {
+            props.navigation.navigate('Transition Register', {
+                newName: this.state.name, 
+                newEmail: this.state.email,
+                newPassword: this.state.password,
+                newAge: this.state.age,
+                newGender: this.state.gender,
+                newBio: this.state.bio
+            })
             this.onCloseState
-            props.navigation.navigate('Home')
         }
     }
 
@@ -159,70 +167,71 @@ class Login extends Component {
                     justifyContent: 'flex-end'
                 }}
                 behavior='padding'>
-                <View
-                    style={{
-                        flex: 1,
-                        backgroundColor: 'white',
-                        justifyContent: 'flex-end'
-                    }}>
-                    <Animated.View
+                <ScrollView>
+                    <View
                         style={{
-                            ...StyleSheet.absoluteFill,
-                            transform: [{ translateY: this.bgY }]
+                            flex: 1,
+                            backgroundColor: 'white',
+                            justifyContent: 'flex-end'
                         }}>
-                        <Image
-                            source={require('../../assets/login-bg.jpg')}
-                            style={{ flex: 1, height: null, width: null }}
-                        />
-                    </Animated.View>
-                    <View style={{ height: height, justifyContent: 'center' }}>
                         <Animated.View
                             style={{
-                                // zIndex: -1,
-                                // opacity: 0,
-                                // zIndex: this.textInputZindex,
-                                // opacity: this.textInputOpacity,
-                                transform: [{ translateY: this.textInputY }],
-                                height: height,
                                 ...StyleSheet.absoluteFill,
-                                top: null,
-                                justifyContent: 'center'
+                                transform: [{ translateY: this.bgY }]
                             }}>
-                            <Block middle style={{ marginTop: 50 }}>
-                                <Input
-                                    placeholder="Name"
-                                    style={styles.textInput}
-                                    value={this.state.name}
-                                    onChangeText={(name) => { this.setState({ name }) }}
-                                />
-                                <Input
-                                    placeholder="Email"
-                                    style={styles.textInput}
-                                    value={this.state.email}
-                                    onChangeText={(email) => { this.setState({ email }) }}
-                                />
-                                <Input
-                                    placeholder="Password"
-                                    password
-                                    viewPass
-                                    style={styles.textInput}
-                                    value={this.state.password}
-                                    onChangeText={(password) => { this.setState({ password }) }}
-                                />
-                                <Input
-                                    placeholder="Age"
-                                    type="numeric"
-                                    style={styles.textInput}
-                                    value={this.state.age}
-                                    onChangeText={(age) => { this.setState({ age }) }}
-                                />
-                                <Input
-                                    placeholder="Gender"
-                                    style={styles.textInput}
-                                    value={this.state.gender}
-                                    onChangeText={(gender) => { this.setState({ gender }) }}
-                                />
-                                {/* <Dropdown
+                            <Image
+                                source={require('../../assets/login-bg.jpg')}
+                                style={{ flex: 1, height: null, width: null }}
+                            />
+                        </Animated.View>
+                        <View style={{ height: height, justifyContent: 'center' }}>
+                            <Animated.View
+                                style={{
+                                    // zIndex: -1,
+                                    // opacity: 0,
+                                    // zIndex: this.textInputZindex,
+                                    // opacity: this.textInputOpacity,
+                                    transform: [{ translateY: this.textInputY }],
+                                    height: height,
+                                    ...StyleSheet.absoluteFill,
+                                    top: null,
+                                    justifyContent: 'center'
+                                }}>
+                                <Block middle style={{ marginTop: 50 }}>
+                                    <Input
+                                        placeholder="Name"
+                                        style={styles.textInput}
+                                        value={this.state.name}
+                                        onChangeText={(name) => { this.setState({ name }) }}
+                                    />
+                                    <Input
+                                        placeholder="Email"
+                                        style={styles.textInput}
+                                        value={this.state.email}
+                                        onChangeText={(email) => { this.setState({ email }) }}
+                                    />
+                                    <Input
+                                        placeholder="Password"
+                                        password
+                                        viewPass
+                                        style={styles.textInput}
+                                        value={this.state.password}
+                                        onChangeText={(password) => { this.setState({ password }) }}
+                                    />
+                                    <Input
+                                        placeholder="Age"
+                                        type="numeric"
+                                        style={styles.textInput}
+                                        value={this.state.age}
+                                        onChangeText={(age) => { this.setState({ age }) }}
+                                    />
+                                    <Input
+                                        placeholder="Gender"
+                                        style={styles.textInput}
+                                        value={this.state.gender}
+                                        onChangeText={(gender) => { this.setState({ gender }) }}
+                                    />
+                                    {/* <Dropdown
                                     // label='Number of people'
                                     style={styles.textInput}
                                     placeholder="Gender"
@@ -230,21 +239,22 @@ class Login extends Component {
                                     containerStyle={{ width: 200 }}
                                     onChangeText={(gender) => { this.setState({ gender }) }}
                                 /> */}
-                                <Input
-                                    placeholder="Bio"
-                                    style={styles.textInput}
-                                    value={this.state.bio}
-                                    onChangeText={(bio) => { this.setState({ bio }) }}
-                                />
-                            </Block>
-                            <TouchableOpacity onPress={this.loginHit}>
-                                <Animated.View style={styles.button} >
-                                    <Text style={{ fontSize: 20, fontWeight: 'bold' }}>REGISTER</Text>
-                                </Animated.View>
-                            </TouchableOpacity>
-                        </Animated.View>
+                                    <Input
+                                        placeholder="Bio"
+                                        style={styles.textInput}
+                                        value={this.state.bio}
+                                        onChangeText={(bio) => { this.setState({ bio }) }}
+                                    />
+                                </Block>
+                                <TouchableOpacity onPress={this.loginHit} style={{ paddingTop: 50 }}>
+                                    <Animated.View style={styles.button} >
+                                        <Text style={{ fontSize: 20, fontWeight: 'bold' }}>REGISTER</Text>
+                                    </Animated.View>
+                                </TouchableOpacity>
+                            </Animated.View>
+                        </View>
                     </View>
-                </View>
+                </ScrollView>
             </KeyboardAvoidingView>
         );
     }
@@ -265,7 +275,8 @@ const styles = StyleSheet.create({
         borderRadius: 35,
         alignItems: 'center',
         justifyContent: 'center',
-        marginVertical: 5
+        marginVertical: 5,
+
     },
     textInput: {
         width: width / 1.2,

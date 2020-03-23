@@ -1,4 +1,4 @@
-import { SUCCESS_REGISTER, FAILED_LOGIN, FAILED_REGISTER, EMPTY_INPUT } from "../actionTypes"
+import { SUCCESS_REGISTER, FAILED_LOGIN, FAILED_REGISTER, EMPTY_INPUT, SUCCESS_LOGIN } from "../actionTypes"
 
 const initialState = {
     isLoading: true,
@@ -9,7 +9,8 @@ const initialState = {
     age: null,
     gender: null,
     bio: null,
-    profilePicture: null
+    profilePicture: null // nanti tambahkan state buat nyimpen token
+
 }
 
 export default function register(state = initialState, action) {
@@ -19,32 +20,23 @@ export default function register(state = initialState, action) {
                 ...state,
                 isLoading: false,
                 isLogin: true,
-                name: action.payload.name,
-                email: action.payload.email,
-                age: action.payload.age,
-                gender: action.payload.gender,
-                bio: action.payload.bio,
-                profilePicture: action.payload.profilePicture
+                access_token: action.payload.access_token,
+                name: action.payload.name
             }
-        case FAILED_REGISTER:
+        case SUCCESS_LOGIN:
             return {
                 ...state,
                 isLoading: false,
-                isLogin: false,
-                access_token: null,
-                name: null,
-                email: null,
-                age: null,
-                gender: null,
-                bio: null,
-                profilePicture: null
+                isLogin: true,
+                access_token: action.payload.access_token,
+                name: action.payload.name
             }
         case EMPTY_INPUT:
             return {
                 ...state,
                 isLogin: false,
-                isLoading:false
-            }            
+                isLoading: false
+            }
         default:
             return state
     }

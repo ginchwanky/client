@@ -110,7 +110,7 @@ class Login extends Component {
 
         this.bgY = interpolate(this.buttonOpacity, {
             inputRange: [0, 1],
-            outputRange: [-(2 / 3) * height, 0],
+            outputRange: [-(1 / 3) * height, 0],
             extrapolate: Extrapolate.CLAMP
         });
 
@@ -159,21 +159,18 @@ class Login extends Component {
                     backgroundColor: 'white',
                     justifyContent: 'flex-end'
                 }}
-                behavior='padding'
-            >
+                behavior='padding'>
                 <View
                     style={{
                         flex: 1,
                         backgroundColor: 'white',
                         justifyContent: 'flex-end'
-                    }}
-                >
+                    }}>
                     <Animated.View
                         style={{
                             ...StyleSheet.absoluteFill,
                             transform: [{ translateY: this.bgY }]
-                        }}
-                    >
+                        }}>
                         <Image
                             source={require('../../assets/login-bg.jpg')}
                             style={{ flex: 1, height: null, width: null }}
@@ -215,7 +212,7 @@ class Login extends Component {
                                 zIndex: this.textInputZindex,
                                 opacity: this.textInputOpacity,
                                 transform: [{ translateY: this.textInputY }],
-                                height: (2 / 3) * height,
+                                height: (1 / 3) * height,
                                 ...StyleSheet.absoluteFill,
                                 top: null,
                                 justifyContent: 'center'
