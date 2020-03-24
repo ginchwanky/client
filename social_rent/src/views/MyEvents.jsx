@@ -82,7 +82,7 @@ export default function MyEvents({ navigation }) {
                data: payload
             })
                .then(({ data }) => {
-                  setModalVisibility(true)
+                  setModalVisibility(false)
                   return axiosInstance({
                      method: 'get',
                      url: `/events/history/${id}`
