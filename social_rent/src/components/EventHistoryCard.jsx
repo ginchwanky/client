@@ -11,18 +11,10 @@ import { Text, Block, theme } from 'galio-framework'
 
 export default function EventHistoryCard(props) {
 
-   const { Event, User, statusApplicant } = props.data
-
-   let status = 'pending'
-   if (statusApplicant) status = 'accepted'
    return (
       <>
          <Block middle>
             <Block left style={styles.card}>
-               {/* <Text style={{fontSize: 18, fontWeight: 'bold'}}>
-                  kondangan
-               </Text>
-               <Text style={{fontSize: 15, paddingHorizontal: 20}} muted> di event ini creator meminta applicant untuk menemani untuk datang ke nihkahan keluarga besar </Text> */}
                <Block row>
                   <Image
                      source={{
@@ -32,9 +24,9 @@ export default function EventHistoryCard(props) {
                      style={{ borderRadius: 10 }}
                   />
                   <Block left style={{ marginLeft: 10, width: 180 }}>
-                     <Text size={15} style={{ fontWeight: 'bold', marginBottom: 5 }}>{Event.name}</Text>
-                     <Text muted>{Event.description.slice(0, 40)}...</Text>
-                     <Text muted italic size={14}>Status: {status}</Text>
+                     <Text size={15} style={{ fontWeight: 'bold', marginBottom: 5 }}>{props.data.name}</Text>
+                     <Text muted>{props.data.description.slice(0, 40)}...</Text>
+                     <Text muted italic size={14}>Status: {props.data.statusEvent}</Text>
                   </Block>
                </Block>
             </Block>

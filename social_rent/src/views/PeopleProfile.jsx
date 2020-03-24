@@ -25,26 +25,12 @@ export default function PeopleProfile({ route }) {
   const [EventsApplied, setEventsApplied] = useState([]);
   const [EventsCreated, setEventsCreated] = useState([]);
   const [Hired, setHired] = useState(0);
-  const access_token = (useSelector(state => state.user.access_token))
   const { data } = route.params
-
-  let profilePic = <Image
-    source={{ uri: 'https://www.acerid.com/wp-content/uploads/2013/05/facebook-profile-picture-no-pic-avatar.jpg' }}
-    style={styles.avatar}
-  />
-
-  if (data.profilePicture) {
-    profilePic = <Image
-      source={{ uri: `${data.profilePicture}` }}
-      style={styles.avatar}
-    />
-  }
 
   useEffect(() => {
     axiosInstance({
       method: 'get',
       url: `/userEvent/history/${data.id}`,
-      headers: access_token
     })
       .then(({ data }) => {
         setEventsApplied(data)
@@ -68,7 +54,17 @@ export default function PeopleProfile({ route }) {
     EventsHistoryMap = (EventsApplied.map((data, i) => <EventHistoryCard data={data} key={i} />))
   }
 
+  let profilePic = <Image
+    source={{ uri: 'https://data.whicdn.com/images/324482590/original.jpg' }}
+    style={styles.avatar}
+  />
 
+  if (data.profilePicture) {
+    profilePic = <Image
+      source={{ uri: `${data.profilePicture}` }}
+      style={styles.avatar}
+    />
+  }
 
   return (
     <>
@@ -171,7 +167,7 @@ export default function PeopleProfile({ route }) {
                     style={{ paddingVertical: 14, alignItems: "baseline" }}
                   >
                     <Text bold size={16} color="#525F7F">
-                      Recent events applied
+                      Recent events
                     </Text>
                   </Block>
 

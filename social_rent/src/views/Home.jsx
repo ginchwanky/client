@@ -215,7 +215,7 @@ const styles = StyleSheet.create({
       backgroundColor: '#fff',
       alignItems: 'center',
       justifyContent: 'center',
-      borderRadius: 25,
+      borderRadius: 10,
       marginHorizontal: 15,
       paddingTop: 10,
       marginBottom: 80
@@ -261,7 +261,7 @@ const styles = StyleSheet.create({
       marginVertical: 10,
       zIndex: 1,
       position: 'absolute',
-      bottom: 90,
-      right: 20
+      bottom: 125,
+      right: 30
    }
 })

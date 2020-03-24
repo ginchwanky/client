@@ -35,20 +35,21 @@ export default function ApplicantCard(props) {
          }
       })
          .then(({ data }) => {
-            button = <Button
-               onlyIcon
-               icon="attach-money"
-               iconFamily="MaterialIcons"
-               iconSize={20}
-               color="#50C7C7"
-               iconColor="#fff"
-               style={{ width: 30, height: 30, marginTop: 20, }}
-               onPress={() => {
-                  props.navigation.navigate('Barcode Scanner',
-                     { EventId: props.data.UserEvent.EventId, UserId: props.data.id }
-                  )
-               }}
-            />
+            // button = <Button
+            //    onlyIcon
+            //    icon="attach-money"
+            //    iconFamily="MaterialIcons"
+            //    iconSize={20}
+            //    color="#50C7C7"
+            //    iconColor="#fff"
+            //    style={{ width: 30, height: 30, marginTop: 20, }}
+            //    onPress={() => {
+            //       props.navigation.navigate('Barcode Scanner',
+            //          { EventId: props.data.UserEvent.EventId, UserId: props.data.id }
+            //       )
+            //    }}
+            // />
+            props.setChangeStatus('ganti')
             setStatusApplicant('accepted')
          })
          .catch(err => {
@@ -86,7 +87,7 @@ export default function ApplicantCard(props) {
          icon="attach-money"
          iconFamily="MaterialIcons"
          iconSize={20}
-         color="#50C7C7"
+         color="error"
          iconColor="#fff"
          style={{ width: 30, height: 30, marginTop: 20, }}
          onPress={() => props.navigation.navigate('Barcode Scanner', { EventId: props.data.UserEvent.EventId, UserId: props.data.id })}
@@ -103,21 +104,21 @@ export default function ApplicantCard(props) {
    return (
       <>
          <Block row style={{ marginVertical: 5 }}>
-            <TouchableOpacity onPress={() => props.navigation.navigate('People Profile')}>
+            <TouchableOpacity onPress={() => props.navigation.navigate('People Profile', {data: props.data})}>
                <Image
                   source={{
-                     uri: 'https://m.media-amazon.com/images/I/71yspNc9hqL._SS500_.jpg',
+                     uri: 'https://data.whicdn.com/images/324482590/original.jpg',
                      height: 50, width: 50
                   }}
                   style={{ borderRadius: 100, marginTop: 10, marginBottom: 10 }}
                />
             </TouchableOpacity>
-            <Block style={{ marginTop: 0, marginLeft: 10, width: 170 }}>
+            <Block style={{ marginLeft: 10, width: 170 }}>
                <Text p>{props.data.name}</Text>
                <Text muted italic>fee: {props.data.UserEvent.payment}</Text>
                <Text muted italic>status: {StatusApplicant}</Text>
             </Block>
-            <Block row space='evenly'>
+            <Block row space='evenly' style={{ width: 100}}>
                {/* <Button
                   onlyIcon
                   icon="attach-money"

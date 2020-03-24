@@ -45,7 +45,7 @@ export default function BarcodeScanner({ route, navigation }) {
               }
             })
               .then(({ data }) => {
-                navigation.navigate('My Events')
+                navigation.navigate('My Event Detail', {id: route.params.EventId})
               })
               .catch(err => {
                 console.log(err.response, `INI ERRORRR PAYMENT`);
