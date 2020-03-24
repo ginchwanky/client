@@ -89,7 +89,7 @@ export default function Home({ navigation, props }) {
                data: payload
             })
                .then(({ data }) => {
-                  setModalVisibility(true)
+                  setModalVisibility(false)
                   return axiosInstance({
                      method: 'get',
                      url: '/events'

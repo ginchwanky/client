@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {
    StyleSheet,
    Image,
    View,
    Dimensions,
-   TouchableOpacity
+   TouchableOpacity,
+   Alert
 } from 'react-native'
 import {
    Text,
@@ -12,14 +13,91 @@ import {
    theme,
    Button
 } from 'galio-framework'
+import axiosInstance from '../instances/axiosInstance'
 
 const { width, height } = Dimensions.get('screen')
 
 export default function ApplicantCard(props) {
 
-   let statusApplicant = 'pending'
+   const [StatusApplicant, setStatusApplicant] = useState('pending');
+
+   
+
+   const acceptApplicant = () => {
+      console.log('accept ke hit');
+
+      axiosInstance({
+         method: 'put',
+         url: `/userEvent/applicants/${props.data.UserEvent.EventId}`,
+         data: {
+            UserId: props.data.id,
+            statusApplicant: true
+         }
+      })
+         .then(({ data }) => {
+            button = <Button
+               onlyIcon
+               icon="attach-money"
+               iconFamily="MaterialIcons"
+               iconSize={20}
+               color="#50C7C7"
+               iconColor="#fff"
+               style={{ width: 30, height: 30, marginTop: 20, }}
+               onPress={() => {
+                  props.navigation.navigate('Barcode Scanner',
+                     { EventId: props.data.UserEvent.EventId, UserId: props.data.id }
+                  )
+               }}
+            />
+            setStatusApplicant('accepted')
+         })
+         .catch(err => {
+            console.log(err.response, `INI ERROR HIREEEEEE`);
+            Alert.alert(
+               'Already hired enough people', 'press ok to confirm', [
+                  {
+                     text: 'ok'
+                  }
+               ]
+            )
+         })
+   }
+
+   useEffect(() => {
+      if (props.data.UserEvent.statusApplicant) {
+         setStatusApplicant('accepted')
+      }
+   }, []);
+
+   let button = <Button
+      onlyIcon
+      icon="check"
+      iconFamily="antdesign"
+      iconSize={20}
+      color="#50C7C7"
+      iconColor="#fff"
+      style={{ width: 30, height: 30, marginTop: 20, marginLeft: 5 }}
+      onPress={() => acceptApplicant()}
+   />
+
+   if (props.data.UserEvent.statusApplicant) {
+      button = <Button
+         onlyIcon
+         icon="attach-money"
+         iconFamily="MaterialIcons"
+         iconSize={20}
+         color="#50C7C7"
+         iconColor="#fff"
+         style={{ width: 30, height: 30, marginTop: 20, }}
+         onPress={() => props.navigation.navigate('Barcode Scanner', { EventId: props.data.UserEvent.EventId, UserId: props.data.id })}
+      />
+   }
+
    if (props.data.UserEvent.statusPayment) {
-      statusApplicant = 'accepted'
+      button =
+         <Block middle>
+            <Text b muted>Paid</Text>
+         </Block>
    }
 
    return (
@@ -37,35 +115,41 @@ export default function ApplicantCard(props) {
             <Block style={{ marginTop: 0, marginLeft: 10, width: 170 }}>
                <Text p>{props.data.name}</Text>
                <Text muted italic>fee: {props.data.UserEvent.payment}</Text>
-               <Text muted italic>status: {statusApplicant}</Text>
-               {/* dibawah ini conditional semisal hired maka munculkan statusPayment */}
+               <Text muted italic>status: {StatusApplicant}</Text>
             </Block>
-            <Button
-               onlyIcon
-               icon="attach-money"
-               iconFamily="MaterialIcons"
-               iconSize={20}
-               color="#50C7C7"
-               iconColor="#fff"
-               style={{ width: 30, height: 30, marginTop: 20,  }} 
-               onPress={() => props.navigation.navigate('Barcode Scanner')}
+            <Block row space='evenly'>
+               {/* <Button
+                  onlyIcon
+                  icon="attach-money"
+                  iconFamily="MaterialIcons"
+                  iconSize={20}
+                  color="#50C7C7"
+                  iconColor="#fff"
+                  style={{ width: 30, height: 30, marginTop: 20, }}
+                  onPress={() => props.navigation.navigate('Barcode Scanner')}
                />
-            <Button
+               <Button
                onlyIcon
                icon="close"
                iconFamily="antdesign"
                iconSize={20}
                color="error"
                iconColor="#fff"
-               style={{ width: 30, height: 30, marginTop: 20, marginLeft: 5 }} />
-            <Button
-               onlyIcon
-               icon="check"
-               iconFamily="antdesign"
-               iconSize={20}
-               color="#50C7C7"
-               iconColor="#fff"
-               style={{ width: 30, height: 30, marginTop: 20, marginLeft: 5 }} />
+               style={{ width: 30, height: 30, marginTop: 20, marginLeft: 5 }}
+               // INI KALO REJECT
+            />
+               <Button
+                  onlyIcon
+                  icon="check"
+                  iconFamily="antdesign"
+                  iconSize={20}
+                  color="#50C7C7"
+                  iconColor="#fff"
+                  style={{ width: 30, height: 30, marginTop: 20, marginLeft: 5 }} /> */}
+
+               {button}
+
+            </Block>
          </Block>
       </>
    )
