@@ -15,6 +15,7 @@ import {
 } from 'galio-framework'
 import Constants from 'expo-constants'
 import axiosInstance from '../instances/axiosInstance'
+import { useSelector } from 'react-redux'
 
 import EventHistoryCard from '../components/EventHistoryCard'
 
@@ -24,10 +25,11 @@ export default function PeopleProfile({ route }) {
   const [EventsApplied, setEventsApplied] = useState([]);
   const [EventsCreated, setEventsCreated] = useState([]);
   const [Hired, setHired] = useState(0);
+  const access_token = (useSelector(state => state.user.access_token))
   const { data } = route.params
 
   let profilePic = <Image
-    source={{ uri: 'https://m.media-amazon.com/images/I/71yspNc9hqL._SS500_.jpg' }}
+    source={{ uri: 'https://www.acerid.com/wp-content/uploads/2013/05/facebook-profile-picture-no-pic-avatar.jpg' }}
     style={styles.avatar}
   />
 
@@ -39,22 +41,26 @@ export default function PeopleProfile({ route }) {
   }
 
   useEffect(() => {
-    axiosInstance.get(`/userEvent/history/${data.id}`)
+    axiosInstance({
+      method: 'get',
+      url: `/userEvent/history/${data.id}`,
+      headers: access_token
+    })
       .then(({ data }) => {
         setEventsApplied(data)
       })
       .catch(err => {
-        console.log(err, `INI ERRORRRRR`);
+        console.log(err.response, `INI ERRORRRRR`);
       })
 
-      axiosInstance.get(`/events/history/${data.id}`)
-        .then(({data}) => {
-          setEventsCreated(data)
-        })
-        .catch(err => {
-          console.log(err, `INI ERROR HISTORY EVENT CREATED GET DI USEEFFECT`);
-          
-        })
+    axiosInstance.get(`/events/history/${data.id}`)
+      .then(({ data }) => {
+        setEventsCreated(data)
+      })
+      .catch(err => {
+        console.log(err.response, `INI ERROR HISTORY EVENT CREATED GET DI USEEFFECT`);
+
+      })
   }, [])
 
   let EventsHistoryMap = <Text muted>this user never applied in an event</Text>
