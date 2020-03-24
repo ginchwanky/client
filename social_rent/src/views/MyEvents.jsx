@@ -21,7 +21,7 @@ import Modal from 'react-native-modal';
 import DatePicker from 'react-native-datepicker'
 import { Dropdown } from 'react-native-material-dropdown';
 import axiosInstance from '../instances/axiosInstance'
-
+import { AsyncStorage } from 'react-native'
 import MyEventsCard from '../components/MyEventsCard'
 
 const { width, height } = Dimensions.get("screen");
@@ -61,9 +61,42 @@ export default function MyEvents({ navigation }) {
          })
          .catch(err => {
             console.log(err.response, `INI ERROR HISTORY EVENT CREATED GET DI USEEFFECT`);
-
          })
    }, [])
+
+   const submitHandler = () => {
+      let payload = {
+         name: Name,
+         desc: Desc,
+         date: Date,
+         numOfRent: NumOfRent,
+         location: Location
+      }
+      AsyncStorage.getItem('access_token')
+         .then(data => {
+            data = JSON.parse(data)
+            return axiosInstance({
+               url: '/events',
+               method: 'POST',
+               headers: { access_token: data.access_token },
+               data: payload
+            })
+               .then(({ data }) => {
+                  setModalVisibility(true)
+                  return axiosInstance({
+                     method: 'get',
+                     url: `/events/history/${id}`
+                  })
+               })
+               .then(({ data }) => {
+                  setEventsCreated(data)
+               })
+               .catch(err => {
+                  console.log(err);
+               })
+         })
+         .catch(console.log)
+   }
 
    return (
       <>
@@ -163,7 +196,7 @@ export default function MyEvents({ navigation }) {
                   />
                   <TouchableOpacity
                      style={{ marginTop: 30 }}
-                     onPress={() => { }}>
+                     onPress={() => submitHandler()}>
                      <Block
                         middle
                         style={{ width: 150, backgroundColor: '#2E71DC', height: 50, borderRadius: 15 }}>
