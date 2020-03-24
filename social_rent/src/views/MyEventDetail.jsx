@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {
    StyleSheet,
    View,
@@ -12,17 +12,56 @@ import {
    theme
 } from 'galio-framework'
 import Constants from 'expo-constants'
+import axiosInstance from '../instances/axiosInstance'
 
 import ApplicantCard from '../components/ApplicantCard'
 
 const { width, height } = Dimensions.get('screen')
 
 export default function MyEventDetail({ route, navigation }) {
+   const { id } = route.params
+
+   const [Event, setEvent] = useState({});
+
+
+
+   useEffect(() => {
+      // FETCH APPLICANT SAMA EVENT DETAIL
+      axiosInstance.get(`/events/${id}`)
+         .then(({ data }) => {
+            setEvent(data)
+         })
+         .catch(err => {
+            console.log(err.response, `INI ERROR EVENT GET ONE`);
+
+         })
+   }, [])
+
+   if (!Event.creator) {
+      // NANTI LOADING DISINI
+      return (
+         <>
+            <View></View>
+         </>
+      )
+   }
+
+   let ApplicantMap = (
+      <Block middle>
+         <Text muted style={{ marginHorizontal: 10 }}>no one applied yet</Text>
+      </Block>
+   )
+   if (Event.event.Users.length > 0) {
+      ApplicantMap = (Event.event.Users.map((data) => <ApplicantCard
+         data={data}
+         key={data.id}
+         navigation={navigation} />))
+   }
 
    return (
       <>
          <View style={styles.statusBar} />
-         <View style={{backgroundColor: 'white'}}>
+         <View style={{ backgroundColor: 'white' }}>
             <ImageBackground
                source={{ uri: 'https://i0.wp.com/mojok.co/terminal/wp-content/uploads/2019/08/sweet-ice-cream-photography-ASti7dxf8CM-unsplash.jpg?resize=800%2C540&ssl=1' }}
                style={styles.profileContainer}
@@ -31,26 +70,27 @@ export default function MyEventDetail({ route, navigation }) {
                <ScrollView>
                   <Block style={styles.eventConatainer}>
                      <Block middle>
-                        <Text h3 bold style={{ marginTop: 20 }}>Kondangan</Text>
-                        <Text muted center style={{ marginHorizontal: 20, marginVertical: 10 }}>Hai i don't have that many friends to ask in order to accompanying me to one of my friends wedding. so can you pretend to be my gf atm?</Text>
-                        <Text p muted>Status: Pending</Text>
+                        <Text h3 bold style={{ marginTop: 20 }}>{Event.event.name}</Text>
+                        <Text
+                           muted
+                           center
+                           style={{ marginHorizontal: 20, marginVertical: 10 }}
+                        >{Event.event.description}</Text>
+                        <Text p muted>Status: {Event.event.statusEvent}</Text>
                         <View style={styles.divider} />
                         <Text bold size={16} color="#525F7F">
                            list of applicants
                     </Text>
+                        <Text muted size={16}>People to hire: {Event.event.numOfRent}</Text>
+
                         {/* <Text muted italic>Tap the applicant to hire or decline</Text> */}
                      </Block>
                      <Block
                         left
-                        style={{ marginHorizontal: 15, marginBottom: 50, marginTop: 20}}
+                        style={{ marginHorizontal: 15, marginBottom: 50, marginTop: 20 }}
                      >
                         {/* DISINI MAP APPLICANT NYA */}
-                        <ApplicantCard navigation={navigation} />
-                        <ApplicantCard navigation={navigation} />
-                        <ApplicantCard navigation={navigation} />
-                        <ApplicantCard navigation={navigation} />
-                        <ApplicantCard navigation={navigation} />
-                        <ApplicantCard navigation={navigation} />
+                        {ApplicantMap}
                      </Block>
                   </Block>
                </ScrollView>

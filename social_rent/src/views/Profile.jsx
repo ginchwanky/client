@@ -18,21 +18,25 @@ import {
 import Constants from 'expo-constants'
 import Modal from 'react-native-modal';
 import { useSelector, useDispatch } from 'react-redux'
+import axiosInstance from '../instances/axiosInstance'
 
 import EventHistoryCard from '../components/EventHistoryCard'
 
 const { width, height } = Dimensions.get("screen");
 
 export default function Profile({ navigation }) {
+  const [EventsApplied, setEventsApplied] = useState([]);
+  const [EventsCreated, setEventsCreated] = useState([]);
 
   const name = (useSelector(state => state.user.name))
   const age = (useSelector(state => state.user.age))
   const bio = (useSelector(state => state.user.bio))
   const profilePicture = (useSelector(state => state.user.profilePicture))
   const access_token = (useSelector(state => state.user.access_token))
+  const id = (useSelector(state => state.user.id))
 
   let profilePic = <Image
-    source={{ uri: 'https://cdnph.upi.com/svc/sv/upi/8631478538164/2016/1/a42cfe55775589649bbb7ea457a45e24/New-Childish-Gambino-album-titled-Awaken-My-Love-found-listed-on-Amazon.jpg' }}
+    source={{ uri: 'https://www.acerid.com/wp-content/uploads/2013/05/facebook-profile-picture-no-pic-avatar.jpg' }}
     style={styles.avatar}
   />
 
@@ -43,14 +47,33 @@ export default function Profile({ navigation }) {
     />
   }
 
-  let dataDropdown = [{
-    value: 'male',
-  }, {
-    value: 'female',
-  }]
+  let EventsHistoryMap = <Text muted>this user never applied in an event</Text>
+  if (EventsApplied.length > 0) {
+    EventsHistoryMap = (EventsApplied.map((data, i) => <EventHistoryCard data={data} key={i} />))
+  }
 
   useEffect(() => {
     // DIA NANTI BAKAL NGE FETCH BUAT NGISI EVENT CREATED APPLIED HIRED
+    axiosInstance({
+      method: 'get',
+      url: `/userEvent/history/${id}`,
+      headers: access_token
+    })
+      .then(({ data }) => {
+        setEventsApplied(data)
+      })
+      .catch(err => {
+        console.log(err.response, `INI ERRORRRRR`);
+      })
+
+    axiosInstance.get(`/events/history/${id}`)
+      .then(({ data }) => {
+        setEventsCreated(data)
+      })
+      .catch(err => {
+        console.log(err.response, `INI ERROR HISTORY EVENT CREATED GET DI USEEFFECT`);
+
+      })
   }, [])
 
   return (
@@ -95,7 +118,7 @@ export default function Profile({ navigation }) {
                         color="#525F7F"
                         style={{ marginBottom: 4 }}
                       >
-                        10
+                        0
                       </Text>
                       <Text size={12} color='grey'>Hired</Text>
                     </Block>
@@ -106,7 +129,7 @@ export default function Profile({ navigation }) {
                         color="#525F7F"
                         style={{ marginBottom: 4 }}
                       >
-                        3
+                        {EventsCreated.length}
                       </Text>
                       <Text size={12} color='grey'>Events created</Text>
                     </Block>
@@ -117,7 +140,7 @@ export default function Profile({ navigation }) {
                         size={18}
                         style={{ marginBottom: 4 }}
                       >
-                        15
+                        {EventsApplied.length}
                       </Text>
                       <Text size={12} color='grey'>Applied</Text>
                     </Block>
@@ -131,7 +154,7 @@ export default function Profile({ navigation }) {
                       {name}, {age}
                     </Text>
                     <Text size={16} color="#32325D" style={{ marginTop: 10 }}>
-                      New York, USA
+                      Jakarta, Indonesia
                     </Text>
                   </Block>
                   <Block middle style={{ marginTop: 30, marginBottom: 16 }}>
@@ -143,7 +166,7 @@ export default function Profile({ navigation }) {
                       color="#525F7F"
                       style={{ textAlign: "center" }}
                     >
-                      Hi nice to meet you, let's be friends and going places!
+                      {bio}
                     </Text>
                   </Block>
                   <Block
@@ -151,7 +174,7 @@ export default function Profile({ navigation }) {
                     style={{ paddingVertical: 14, alignItems: "baseline" }}
                   >
                     <Text bold size={16} color="#525F7F">
-                      Recent Events
+                      Recent applied
                     </Text>
                   </Block>
                   <Block
@@ -165,9 +188,7 @@ export default function Profile({ navigation }) {
                     />
                   </Block>
                   {/* disini loop recents events */}
-                  {/* <EventHistoryCard />
-                  <EventHistoryCard />
-                  <EventHistoryCard /> */}
+                  {EventsHistoryMap}
 
                   <Block middle style={{ marginTop: 30, marginBottom: 60 }}>
                     <Block style={styles.divider} />

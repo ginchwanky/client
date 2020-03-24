@@ -20,6 +20,7 @@ import Constants from 'expo-constants'
 import Modal from 'react-native-modal';
 import DatePicker from 'react-native-datepicker'
 import { Dropdown } from 'react-native-material-dropdown';
+import axiosInstance from '../instances/axiosInstance'
 
 import MyEventsCard from '../components/MyEventsCard'
 
@@ -27,6 +28,8 @@ const { width, height } = Dimensions.get("screen");
 
 
 export default function MyEvents({ navigation }) {
+   const id = useSelector(state => state.user.id)
+
    const [ModalVisibility, setModalVisibility] = useState(false);
    const [Name, setName] = useState('');
    const [Desc, setDesc] = useState('');
@@ -34,6 +37,7 @@ export default function MyEvents({ navigation }) {
    const [Location, setLocation] = useState('');
    const [NumOfRent, setNumOfRent] = useState(0);
 
+   const [EventsCreated, setEventsCreated] = useState([]);
 
    let dataDropdown = [{
       value: 1,
@@ -44,6 +48,23 @@ export default function MyEvents({ navigation }) {
    }, {
       value: 4
    }]
+
+   let EventsCreatedMap = <Text muted>you never create an event, let's start one!</Text>
+   if (EventsCreated.length > 0) {
+      EventsCreatedMap = (EventsCreated.map((data) => <MyEventsCard data={data} key={data.id} navigation={navigation} />))
+   }
+
+   useEffect(() => {
+      axiosInstance.get(`/events/history/${id}`)
+         .then(({ data }) => {
+            setEventsCreated(data)
+         })
+         .catch(err => {
+            console.log(err.response, `INI ERROR HISTORY EVENT CREATED GET DI USEEFFECT`);
+
+         })
+   }, [])
+
    return (
       <>
          <View style={styles.statusBar} />
@@ -72,9 +93,11 @@ export default function MyEvents({ navigation }) {
                <View style={styles.container}>
 
                   {/* Disini mapMyEventsCard jangan lupa pprops nya */}
+                  {/* <MyEventsCard navigation={navigation} />
                   <MyEventsCard navigation={navigation} />
-                  <MyEventsCard navigation={navigation} />
-                  <MyEventsCard navigation={navigation} />
+                  <MyEventsCard navigation={navigation} /> */}
+
+                  {EventsCreatedMap}
 
                </View>
             </ScrollView>
@@ -88,7 +111,7 @@ export default function MyEvents({ navigation }) {
             animationOutTiming={700}
             avoidKeyboard={true}
          >
-             <Block middle>
+            <Block middle>
                <View style={styles.modal}>
                   <Text h5 bold italic style={{ marginBottom: 20 }}>Create new event</Text>
                   <Input

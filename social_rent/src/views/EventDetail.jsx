@@ -30,15 +30,22 @@ export default function MyEventDetail({ route, navigation }) {
    const [payment, setpayment] = useState(null);
    const [notes, setnotes] = useState('');
 
-   useEffect(() => {
-      axiosInstance.get(`/events/${id}`)
-         .then(({ data }) => {
-            setData(data)
-         })
-         .catch(err => {
-            console.log(err, `ERRRORRRRRRRRRRR`);
-         })
-   }, []);
+
+
+   let profilePic = <Image
+      source={{
+         uri: 'https://www.acerid.com/wp-content/uploads/2013/05/facebook-profile-picture-no-pic-avatar.jpg',
+         height: 100, width: 100
+      }}
+      style={{ borderRadius: 100, marginTop: 10, marginBottom: 10 }}
+   />
+
+   if (Data.creator.profilePicture) {
+      profilePic = <Image
+         source={{ uri: `${Data.creator.profilePicture}`, height: 100, width: 100 }}
+         style={{ borderRadius: 100, marginTop: 10, marginBottom: 10 }}
+      />
+   }
 
    if (!Data.event) {
       // NANTI LOADING DISINI
@@ -48,6 +55,16 @@ export default function MyEventDetail({ route, navigation }) {
          </>
       )
    }
+
+   useEffect(() => {
+      axiosInstance.get(`/events/${id}`)
+         .then(({ data }) => {
+            setData(data)
+         })
+         .catch(err => {
+            console.log(err, `ERRRORRRRRRRRRRR`);
+         })
+   }, []);
 
    return (
       <>
@@ -71,13 +88,7 @@ export default function MyEventDetail({ route, navigation }) {
                     </Text>
                      <TouchableOpacity
                         onPress={() => navigation.navigate('People Profile', { data: Data.creator })}>
-                        <Image
-                           source={{
-                              uri: 'https://m.media-amazon.com/images/I/71yspNc9hqL._SS500_.jpg',
-                              height: 100, width: 100
-                           }}
-                           style={{ borderRadius: 100, marginTop: 10, marginBottom: 10 }}
-                        />
+                        {profilePic}
                      </TouchableOpacity>
                      <Text italic muted>created by: {Data.creator.name}</Text>
                      <Button
