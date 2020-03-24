@@ -26,6 +26,7 @@ import axiosInstance from '../instances/axiosInstance'
 
 import EventCard from '../components/EventCard'
 import { useSelector } from 'react-redux';
+import { AsyncStorage } from 'react-native'
 
 const { width, height } = Dimensions.get("screen");
 
@@ -67,7 +68,41 @@ export default function Home({ navigation, props }) {
 
    let DataMap = <Text style={{ marginBottom: 15, marginTop: 10 }}>No current event available</Text>
    if (Data.length > 0) {
-      DataMap = (Data.map(data => <EventCard navigation={navigation} data={data} key={data.id}/>)) 
+      DataMap = (Data.map(data => <EventCard navigation={navigation} data={data} key={data.id} />))
+   }
+
+   const submitHandler = () => {
+      let payload = {
+         name: Name,
+         desc: Desc,
+         date: Date,
+         numOfRent: NumOfRent,
+         location: Location
+      }
+      AsyncStorage.getItem('access_token')
+         .then(data => {
+            data = JSON.parse(data)
+            return axiosInstance({
+               url: '/events',
+               method: 'POST',
+               headers: { access_token: data.access_token },
+               data: payload
+            })
+               .then(({ data }) => {
+                  setModalVisibility(true)
+                  return axiosInstance({
+                     method: 'get',
+                     url: '/events'
+                  })
+               })
+               .then(({ data }) => {
+                  setData(data)
+               })
+               .catch(err => {
+                  console.log(err);
+               })
+         })
+         .catch(console.log)
    }
 
    return (
@@ -96,9 +131,7 @@ export default function Home({ navigation, props }) {
                </Text>
                </Block>
                <View style={styles.container}>
-
                   {DataMap}
-
                </View>
             </ScrollView>
          </ImageBackground>
@@ -162,7 +195,7 @@ export default function Home({ navigation, props }) {
                   />
                   <TouchableOpacity
                      style={{ marginTop: 30 }}
-                     onPress={() => { }}>
+                     onPress={() => submitHandler()}>
                      <Block
                         middle
                         style={{ width: 150, backgroundColor: '#2E71DC', height: 50, borderRadius: 15 }}>
