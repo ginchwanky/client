@@ -9,8 +9,8 @@ const initialState = {
     age: null,
     gender: null,
     bio: null,
-    profilePicture: null // nanti tambahkan state buat nyimpen token
-
+    profilePicture: null,
+    id: null
 }
 
 export default function register(state = initialState, action) {
@@ -26,7 +26,8 @@ export default function register(state = initialState, action) {
                 age: action.payload.age,
                 gender: action.payload.gender,
                 bio: action.payload.bio,
-                profilePicture: action.payload.profilePicture
+                profilePicture: action.payload.profilePicture,
+                id: action.payload.id
             }
         case SUCCESS_LOGIN:
             return {
@@ -39,7 +40,8 @@ export default function register(state = initialState, action) {
                 age: action.payload.age,
                 gender: action.payload.gender,
                 bio: action.payload.bio,
-                profilePicture: action.payload.profilePicture
+                profilePicture: action.payload.profilePicture,
+                id: action.payload.id
             }
         case EMPTY_INPUT:
             return {
