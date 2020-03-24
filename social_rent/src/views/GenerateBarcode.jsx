@@ -13,11 +13,12 @@ import {
 } from 'galio-framework'
 import axios from 'axios'
 import Constants from 'expo-constants'
+import {useSelector} from 'react-redux'
 
 const { width, height } = Dimensions.get('screen')
 
 export default function GenerateBarcode({ navigation, route }) {
-   const [QrCode, setQrCode] = useState('test');
+   const QrCode = (useSelector(state => state.user.id))
 
    return (
       <>

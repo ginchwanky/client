@@ -17,6 +17,11 @@ const { width, height } = Dimensions.get('screen')
 
 export default function ApplicantCard(props) {
 
+   let statusApplicant = 'pending'
+   if (props.data.UserEvent.statusPayment) {
+      statusApplicant = 'accepted'
+   }
+
    return (
       <>
          <Block row style={{ marginVertical: 5 }}>
@@ -30,9 +35,10 @@ export default function ApplicantCard(props) {
                />
             </TouchableOpacity>
             <Block style={{ marginTop: 0, marginLeft: 10, width: 170 }}>
-               <Text p>Niki prakoso</Text>
-               <Text muted italic>fee: 200.000</Text>
-               <Text muted italic>status: pending</Text>
+               <Text p>{props.data.name}</Text>
+               <Text muted italic>fee: {props.data.UserEvent.payment}</Text>
+               <Text muted italic>status: {statusApplicant}</Text>
+               {/* dibawah ini conditional semisal hired maka munculkan statusPayment */}
             </Block>
             <Button
                onlyIcon

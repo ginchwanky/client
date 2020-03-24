@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {
    StyleSheet,
    View,
@@ -14,9 +14,16 @@ import {
 
 export default function MyEventCard(props) {
 
+   useEffect(() => {
+      console.log(props);
+
+   }, [])
+
    return (
       <>
-         <TouchableOpacity onPress={() => { props.navigation.navigate('My Event Detail') }}>
+         <TouchableOpacity
+            onPress={() => { props.navigation.navigate('My Event Detail', { id: props.data.id }) }}
+         >
             <View style={{
                marginTop: 10, marginBottom: 20, shadowOpacity: 0.8, shadowRadius: 2
             }}>
@@ -32,17 +39,17 @@ export default function MyEventCard(props) {
                      <Text
                         muted
                         style={{ marginTop: 0, fontWeight: 'bold', textAlign: 'center', fontSize: 20 }}
-                     >Kondangan</Text>
+                     >{props.data.name}</Text>
                      <Text
                         center
                         style={{ color: 'grey', marginTop: 5 }}
-                     >Ini adalah deskripsi dari event. ini bertujuan untuk bla </Text>
+                     >{props.data.description}</Text>
                      <Text
                         center
                         muted
                         italic
                         style={{ color: 'grey', marginTop: 5 }}
-                     >Status: pending</Text>
+                     >Status: {props.data.statusEvent}</Text>
                   </View>
                </View>
             </View>
