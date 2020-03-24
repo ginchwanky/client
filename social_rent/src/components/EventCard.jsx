@@ -25,7 +25,7 @@ export default function EventCard(props) {
             }}>
                <Image
                   source={{
-                     uri: 'https://thoughtcatalog.files.wordpress.com/2016/08/bffs-2.jpg?w=1140&h=760',
+                     uri: 'https://i0.wp.com/mojok.co/terminal/wp-content/uploads/2019/08/sweet-ice-cream-photography-ASti7dxf8CM-unsplash.jpg?resize=800%2C540&ssl=1',
                      height: 150, width: 300
                   }}
                   style={{ borderRadius: 15 }}

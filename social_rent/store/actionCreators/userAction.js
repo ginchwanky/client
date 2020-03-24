@@ -7,6 +7,7 @@ import {
     FAILED_LOGIN
 } from '../actionTypes'
 import axios from 'axios'
+import { Alert, AsyncStorage } from 'react-native'
 
 import { setAccessToken } from '../../utilities/accesstoken'
 
@@ -68,11 +69,16 @@ export const register = (payload) => {
     return dispatch => {
         axios
             .post(`http://localhost:3000/users/register`, newPayload)
-            .then(({data}) => {
+            .then(({ data }) => {
+                console.log(data, `INI REGISTERRRRR`);
+
                 setAccessToken(JSON.stringify(data))
                 dispatch(successRegister(data))
             })
-            .catch(console.log)
+            .catch(err => {
+                console.log(err.response, `INI ERRORRRRRRRRRRRRR`);
+
+            })
     }
 }
 
@@ -107,10 +113,12 @@ export const login = (payload) => {
     return dispatch => {
         axios
             .post(`http://localhost:3000/users/login`, payload)
-            .then(({data}) => {
+            .then(({ data }) => {
                 setAccessToken(JSON.stringify(data))
                 dispatch(successLogin(data))
             })
-            .catch(console.log)
+            .catch(err => {
+                Alert.alert('Login failed', 'Email / password wrong', [{ text: 'OK' }])
+            })
     }
 }

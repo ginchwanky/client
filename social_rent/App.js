@@ -8,6 +8,7 @@ import { Asset } from 'expo-asset'
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { Ionicons, MaterialIcons } from '@expo/vector-icons';
 import { Provider } from 'react-redux'
 import store from './store/index'
 
@@ -35,6 +36,20 @@ const Tab = createBottomTabNavigator()
 function HomeScreen() {
   return (
     <Tab.Navigator
+      screenOptions={({ route }) => ({
+        tabBarIcon: ({ focused, color, size }) => {
+          let iconName;
+
+          if (route.name === 'Events') {
+            iconName = focused ? 'ios-apps' : 'ios-apps';
+          } else if (route.name === 'Profile') {
+            iconName = focused ? 'md-person' : 'md-person';
+          }
+
+          // You can return any component that you like here!
+          return <Ionicons name={iconName} size={size} color={color} />;
+        },
+      })}
       tabBarOptions={{
         activeTintColor: '#2E71DC',
         inactiveTintColor: 'grey',
@@ -43,7 +58,7 @@ function HomeScreen() {
       }}
       initialRouteName='Events'
     >
-      <Tab.Screen name="Chats" component={Chats} />
+      {/* <Tab.Screen name="Chats" component={Chats} /> */}
       <Tab.Screen name="Events" component={Home} />
       <Tab.Screen name="Profile" component={Profile} />
     </Tab.Navigator>
