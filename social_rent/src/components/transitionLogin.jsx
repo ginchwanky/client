@@ -2,11 +2,11 @@ import React, { useEffect, useState } from 'react'
 import {
     View,
     Text,
-    Button
+    Button,
+    Alert
 } from 'react-native'
 import { useDispatch, useSelector } from 'react-redux'
 import { login } from '../../store/actionCreators/userAction'
-import { TouchableHighlight } from 'react-native-gesture-handler'
 
 export default function TransitionLogin({ navigation, route }) {
     const access_token = useSelector(state => state.user.access_token)
@@ -31,6 +31,7 @@ export default function TransitionLogin({ navigation, route }) {
 
     useEffect(() => {
         if (access_token) {
+            console.log(access_token);
             navigation.navigate('Home')
         } else {
             navigation.navigate('Landing Page')

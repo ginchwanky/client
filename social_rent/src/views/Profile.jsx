@@ -7,7 +7,8 @@ import {
   Button,
   Dimensions,
   ScrollView,
-  TouchableOpacity
+  TouchableOpacity,
+  AsyncStorage
 } from 'react-native'
 import {
   Text,
@@ -19,12 +20,15 @@ import Constants from 'expo-constants'
 import Modal from 'react-native-modal';
 import { useSelector, useDispatch } from 'react-redux'
 import axiosInstance from '../instances/axiosInstance'
+import { register, emptyInput, logout } from '../../store/actionCreators/userAction'
 
 import EventHistoryCard from '../components/EventHistoryCard'
 
 const { width, height } = Dimensions.get("screen");
 
 export default function Profile({ navigation }) {
+  const dispatch = useDispatch()
+
   const [EventsApplied, setEventsApplied] = useState([]);
   const [EventsCreated, setEventsCreated] = useState([]);
 
@@ -47,9 +51,19 @@ export default function Profile({ navigation }) {
     />
   }
 
+  const Logout = () => {
+    AsyncStorage.removeItem('access_token')
+      .then(_ => {
+        dispatch(logout)
+        navigation.navigate('Landing Page')
+      })
+      .catch(err => {
+        console.log(err, `INI ERRRRR LOGOUT`);
 
-  useEffect(() => {
-    // DIA NANTI BAKAL NGE FETCH BUAT NGISI EVENT CREATED APPLIED HIRED
+      })
+  }
+
+  const fetchAppliedHistory = () => {
     axiosInstance({
       method: 'get',
       url: `/userEvent/history/${id}`,
@@ -60,17 +74,27 @@ export default function Profile({ navigation }) {
       .catch(err => {
         console.log(err.response, `INI ERRORRRRR`);
       })
+  }
 
+  const fetchEventHistory = () => {
     axiosInstance.get(`/events/history/${id}`)
       .then(({ data }) => {
         setEventsCreated(data)
         console.log(data, `INI EVENT HISTORYYYYYYYYY`);
-        
+
       })
       .catch(err => {
         console.log(err.response, `INI ERROR HISTORY EVENT CREATED GET DI USEEFFECT`);
 
       })
+  }
+
+  useEffect(() => {
+    if (!access_token) {
+      navigation.navigate('Landing Page')
+    }
+    fetchAppliedHistory()
+    fetchEventHistory()
   }, [])
 
   let EventsHistoryMap = <Text muted>this user never applied in an event</Text>
@@ -186,7 +210,11 @@ export default function Profile({ navigation }) {
                     <Button
                       title="my events"
                       color="#2E71DC"
-                      onPress={() => navigation.navigate('My Events')}
+                      onPress={() => {
+                        navigation.navigate('My Events')
+                        fetchEventHistory()
+                        fetchAppliedHistory()
+                      }}
                     />
                   </Block>
                   {/* disini loop recents events */}
@@ -194,7 +222,11 @@ export default function Profile({ navigation }) {
 
                   <Block middle style={{ marginTop: 30, marginBottom: 60 }}>
                     <Block style={styles.divider} />
-                    <TouchableOpacity>
+                    <TouchableOpacity
+                      onPress={() => {
+                        Logout()
+                      }}
+                    >
                       <View style={styles.button}>
                         <Text style={{ fontSize: 15, fontWeight: 'bold', color: 'red' }}>
                           LOGOUT

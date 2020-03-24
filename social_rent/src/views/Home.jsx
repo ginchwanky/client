@@ -32,7 +32,7 @@ const { width, height } = Dimensions.get("screen");
 
 export default function Home({ navigation, props }) {
    const {
-      isLoading, isLogin, name, email, age, gender, bio, profilePicture
+      isLoading, isLogin, name, email, age, gender, bio, profilePicture, access_token
    } = useSelector(state => state)
 
    const [ModalVisibility, setModalVisibility] = useState(false);
@@ -54,6 +54,9 @@ export default function Home({ navigation, props }) {
    }]
 
    useEffect(() => {
+      // if (!access_token) {
+      //    navigation.navigate('Landing Page')
+      // }
       axiosInstance({
          method: 'get',
          url: '/events'

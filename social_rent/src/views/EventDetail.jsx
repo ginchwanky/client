@@ -131,7 +131,7 @@ export default function MyEventDetail({ route, navigation }) {
       <>
          <View style={styles.statusBar} />
          <ImageBackground
-            source={{ uri: 'https://thoughtcatalog.files.wordpress.com/2016/08/bffs-2.jpg?w=1140&h=760' }}
+            source={{ uri: 'https://i0.wp.com/mojok.co/terminal/wp-content/uploads/2019/08/sweet-ice-cream-photography-ASti7dxf8CM-unsplash.jpg?resize=800%2C540&ssl=1' }}
             style={styles.profileContainer}
             imageStyle={styles.profileBackground}
          >
