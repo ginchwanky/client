@@ -6,7 +6,8 @@ import {
    Dimensions,
    ScrollView,
    Image,
-   TouchableOpacity
+   TouchableOpacity,
+   AsyncStorage
 } from 'react-native'
 import {
    Block,
@@ -30,6 +31,37 @@ export default function MyEventDetail({ route, navigation }) {
    const [payment, setpayment] = useState(null);
    const [notes, setnotes] = useState('');
 
+   const submitHandler = () => {
+      let payload = {
+         EventId: id,
+         payment: Number(payment),
+         date: Data.event.date
+      }
+      console.log('ini payload', payload)
+      AsyncStorage.getItem('access_token')
+         .then(data => {
+            data = JSON.parse(data)
+            console.log('ini token', data.access_token)
+            return axiosInstance({
+               url: '/userEvent',
+               method: 'POST',
+               headers: { access_token: data.access_token },
+               data: payload
+            })
+               .then(({ data }) => {
+                  setModalVisibility(true)
+                  return axiosInstance({
+                     method: 'GET',
+                     url: `/events/${id}`
+                  })
+               })
+               .then(({ data }) => {
+                  console.log(data, '==========')
+                  setData(data)
+               })
+               .catch(console.log)
+         })
+   }
 
    useEffect(() => {
       axiosInstance.get(`/events/${id}`)
@@ -125,7 +157,7 @@ export default function MyEventDetail({ route, navigation }) {
 
                   <TouchableOpacity
                      style={{ marginTop: 30 }}
-                     onPress={() => { }}>
+                     onPress={() => submitHandler()}>
                      <Block
                         middle
                         style={{ width: 150, backgroundColor: '#2E71DC', height: 50, borderRadius: 15 }}>
