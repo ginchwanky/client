@@ -31,6 +31,23 @@ export default function MyEventDetail({ route, navigation }) {
    const [notes, setnotes] = useState('');
 
 
+   useEffect(() => {
+      axiosInstance.get(`/events/${id}`)
+         .then(({ data }) => {
+            setData(data)
+         })
+         .catch(err => {
+            console.log(err, `ERRRORRRRRRRRRRR`);
+         })
+   }, []);
+   if (!Data.event) {
+      // NANTI LOADING DISINI
+      return (
+         <>
+            <View></View>
+         </>
+      )
+   }
 
    let profilePic = <Image
       source={{
@@ -46,25 +63,6 @@ export default function MyEventDetail({ route, navigation }) {
          style={{ borderRadius: 100, marginTop: 10, marginBottom: 10 }}
       />
    }
-
-   if (!Data.event) {
-      // NANTI LOADING DISINI
-      return (
-         <>
-            <View></View>
-         </>
-      )
-   }
-
-   useEffect(() => {
-      axiosInstance.get(`/events/${id}`)
-         .then(({ data }) => {
-            setData(data)
-         })
-         .catch(err => {
-            console.log(err, `ERRRORRRRRRRRRRR`);
-         })
-   }, []);
 
    return (
       <>
@@ -88,7 +86,9 @@ export default function MyEventDetail({ route, navigation }) {
                     </Text>
                      <TouchableOpacity
                         onPress={() => navigation.navigate('People Profile', { data: Data.creator })}>
+
                         {profilePic}
+
                      </TouchableOpacity>
                      <Text italic muted>created by: {Data.creator.name}</Text>
                      <Button
