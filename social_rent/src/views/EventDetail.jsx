@@ -7,7 +7,8 @@ import {
    ScrollView,
    Image,
    TouchableOpacity,
-   AsyncStorage
+   AsyncStorage,
+   Alert
 } from 'react-native'
 import {
    Block,
@@ -19,12 +20,14 @@ import {
 import Constants from 'expo-constants'
 import Modal from 'react-native-modal';
 import axiosInstance from '../instances/axiosInstance'
+import { useSelector } from 'react-redux'
 
 
 const { width, height } = Dimensions.get('screen')
 
 export default function MyEventDetail({ route, navigation }) {
    const { id } = route.params
+   const currentUserId = useSelector(state => state.user.id)
 
    const [Data, setData] = useState([]);
    const [ModalVisibility, setModalVisibility] = useState(false);
@@ -49,7 +52,7 @@ export default function MyEventDetail({ route, navigation }) {
                data: payload
             })
                .then(({ data }) => {
-                  setModalVisibility(true)
+                  setModalVisibility(false)
                   return axiosInstance({
                      method: 'GET',
                      url: `/events/${id}`
@@ -58,8 +61,31 @@ export default function MyEventDetail({ route, navigation }) {
                .then(({ data }) => {
                   console.log(data, '==========')
                   setData(data)
+                  Alert.alert(
+                     `You applied to this event successfully!`,
+                     `be sure to attend this event`,
+                     [
+                        {
+                           text: 'ok'
+                        }
+                     ]
+                  )
                })
-               .catch(console.log)
+               .catch(err => {
+                  console.log(err.response.data, `INI DARI APPLIED EVENTTTTTT`);
+
+                  Alert.alert(
+                     `Oops`,
+                     `${err.response.data.errors[0]}`,
+                     [
+                        {
+                           text: 'ok', onPress: () => {
+                              setModalVisibility(false)
+                           }
+                        }
+                     ]
+                  )
+               })
          })
    }
 
@@ -67,6 +93,11 @@ export default function MyEventDetail({ route, navigation }) {
       axiosInstance.get(`/events/${id}`)
          .then(({ data }) => {
             setData(data)
+            console.log(data, `INI DATAAAAA`);
+            
+            if (currentUserId == data.creator.id) {
+               navigation.navigate('My Event Detail', { id: data.event.id })
+            }
          })
          .catch(err => {
             console.log(err, `ERRRORRRRRRRRRRR`);
@@ -83,7 +114,7 @@ export default function MyEventDetail({ route, navigation }) {
 
    let profilePic = <Image
       source={{
-         uri: 'https://www.acerid.com/wp-content/uploads/2013/05/facebook-profile-picture-no-pic-avatar.jpg',
+         uri: 'https://i.pinimg.com/originals/ae/ee/36/aeee36fb34dfae1c43e33c6c3affc1dd.jpg',
          height: 100, width: 100
       }}
       style={{ borderRadius: 100, marginTop: 10, marginBottom: 10 }}

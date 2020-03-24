@@ -22,12 +22,11 @@ export default function MyEventDetail({ route, navigation }) {
    const { id } = route.params
 
    const [Event, setEvent] = useState({});
-   const [ChangeStatus, setChangeStatus] = useState(null);
+   const [ChangeStatus, setChangeStatus] = useState(0);
 
 
 
    useEffect(() => {
-      // FETCH APPLICANT SAMA EVENT DETAIL
       axiosInstance.get(`/events/${id}`)
          .then(({ data }) => {
             setEvent(data)
@@ -36,7 +35,7 @@ export default function MyEventDetail({ route, navigation }) {
             console.log(err.response, `INI ERROR EVENT GET ONE`);
 
          })
-   }, [])
+   }, [ChangeStatus])
 
    if (!Event.creator) {
       // NANTI LOADING DISINI
@@ -56,7 +55,10 @@ export default function MyEventDetail({ route, navigation }) {
       ApplicantMap = (Event.event.Users.map((data) => <ApplicantCard
          data={data}
          key={data.id}
-         navigation={navigation} />))
+         navigation={navigation}
+         setChangeStatus={setChangeStatus}
+      />
+      ))
    }
 
    return (

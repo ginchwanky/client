@@ -36,7 +36,7 @@ export default function Profile({ navigation }) {
   const id = (useSelector(state => state.user.id))
 
   let profilePic = <Image
-    source={{ uri: 'https://www.acerid.com/wp-content/uploads/2013/05/facebook-profile-picture-no-pic-avatar.jpg' }}
+    source={{ uri: 'https://i.pinimg.com/originals/ae/ee/36/aeee36fb34dfae1c43e33c6c3affc1dd.jpg' }}
     style={styles.avatar}
   />
 
@@ -47,17 +47,12 @@ export default function Profile({ navigation }) {
     />
   }
 
-  let EventsHistoryMap = <Text muted>this user never applied in an event</Text>
-  if (EventsApplied.length > 0) {
-    EventsHistoryMap = (EventsApplied.map((data, i) => <EventHistoryCard data={data} key={i} />))
-  }
 
   useEffect(() => {
     // DIA NANTI BAKAL NGE FETCH BUAT NGISI EVENT CREATED APPLIED HIRED
     axiosInstance({
       method: 'get',
       url: `/userEvent/history/${id}`,
-      headers: access_token
     })
       .then(({ data }) => {
         setEventsApplied(data)
@@ -69,12 +64,19 @@ export default function Profile({ navigation }) {
     axiosInstance.get(`/events/history/${id}`)
       .then(({ data }) => {
         setEventsCreated(data)
+        console.log(data, `INI EVENT HISTORYYYYYYYYY`);
+        
       })
       .catch(err => {
         console.log(err.response, `INI ERROR HISTORY EVENT CREATED GET DI USEEFFECT`);
 
       })
   }, [])
+
+  let EventsHistoryMap = <Text muted>this user never applied in an event</Text>
+  if (EventsCreated.length > 0) {
+    EventsHistoryMap = (EventsCreated.map((data) => <EventHistoryCard data={data} key={data.i} />))
+  }
 
   return (
     <>
@@ -174,7 +176,7 @@ export default function Profile({ navigation }) {
                     style={{ paddingVertical: 14, alignItems: "baseline" }}
                   >
                     <Text bold size={16} color="#525F7F">
-                      Recent applied
+                      Recent events
                     </Text>
                   </Block>
                   <Block
