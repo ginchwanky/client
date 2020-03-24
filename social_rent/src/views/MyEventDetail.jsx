@@ -22,6 +22,7 @@ export default function MyEventDetail({ route, navigation }) {
    const { id } = route.params
 
    const [Event, setEvent] = useState({});
+   const [ChangeStatus, setChangeStatus] = useState(null);
 
 
 
