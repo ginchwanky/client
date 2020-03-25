@@ -97,7 +97,7 @@ export default function Profile({ navigation }) {
     fetchEventHistory()
   }, [])
 
-  let EventsHistoryMap = <Text muted>this user never applied in an event</Text>
+  let EventsHistoryMap = <Text muted>you never create an event</Text>
   if (EventsCreated.length > 0) {
     EventsHistoryMap = (EventsCreated.map((data) => <EventHistoryCard data={data} key={data.i} />))
   }

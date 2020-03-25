@@ -59,7 +59,7 @@ function HomeScreen() {
       }}
       initialRouteName='Events'
     >
-      <Tab.Screen name="Chats" component={Chats} />
+      {/* <Tab.Screen name="Chats" component={Chats} /> */}
       <Tab.Screen name="Events" component={Home} />
       <Tab.Screen name="Profile" component={Profile} />
     </Tab.Navigator>
@@ -92,7 +92,7 @@ export default function App() {
           <Stack.Screen name='My Event Detail' component={MyEventDetail} />
           <Stack.Screen name='Transition Register' component={TransitionRegister} />
           <Stack.Screen name='Transition Login' component={TransitionLogin} />
-
+          <Stack.Screen name='Chats' component={Chats} />
 
         </Stack.Navigator>
       </NavigationContainer>

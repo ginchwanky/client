@@ -21,10 +21,20 @@ import EventHistoryCard from '../components/EventHistoryCard'
 
 const { width, height } = Dimensions.get("screen");
 
-export default function PeopleProfile({ route }) {
+export default function PeopleProfile({ route, navigation }) {
   const [EventsApplied, setEventsApplied] = useState([]);
   const [EventsCreated, setEventsCreated] = useState([]);
   const [Hired, setHired] = useState(0);
+  const name = useSelector(state => state.user.name)
+  const profilePicture = useSelector(state => state.user.profilePicture)
+  const id = useSelector(state => state.user.id)
+
+  const dataProfile = {
+    name,
+    profilePicture,
+    id
+  }
+
   const { data } = route.params
 
   useEffect(() => {
@@ -34,6 +44,8 @@ export default function PeopleProfile({ route }) {
     })
       .then(({ data }) => {
         setEventsApplied(data)
+        console.log(data, `INI EVENT APPLIEDDDDDDDD`);
+
       })
       .catch(err => {
         console.log(err.response, `INI ERRORRRRR`);
@@ -50,8 +62,8 @@ export default function PeopleProfile({ route }) {
   }, [])
 
   let EventsHistoryMap = <Text muted>this user never applied in an event</Text>
-  if (EventsApplied.length > 0) {
-    EventsHistoryMap = (EventsApplied.map((data, i) => <EventHistoryCard data={data} key={i} />))
+  if (EventsCreated.length > 0) {
+    EventsHistoryMap = (EventsCreated.map((data, i) => <EventHistoryCard data={data} key={i} />))
   }
 
   let profilePic = <Image
@@ -97,6 +109,7 @@ export default function PeopleProfile({ route }) {
                     <Button
                       title="Send Message"
                       color="#2E71DC"
+                      onPress={() => { navigation.navigate('Chats', { dataPeople: data, dataProfile }) }}
                     />
                   </Block>
                   <Block row space="between">

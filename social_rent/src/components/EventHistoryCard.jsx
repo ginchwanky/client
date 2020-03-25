@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {
    StyleSheet,
    ScrollView,
@@ -11,6 +11,10 @@ import { Text, Block, theme } from 'galio-framework'
 
 export default function EventHistoryCard(props) {
 
+   useEffect(() => {
+      console.log(props, `INI PROPSSSSSSSSS`);
+      
+   }, [])
    return (
       <>
          <Block middle>
