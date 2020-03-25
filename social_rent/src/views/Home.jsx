@@ -56,12 +56,12 @@ export default function Home({ navigation, props }) {
       if (finalStatus !== 'granted') {
          return;
       }
-      console.log(finalStatus)
+      console.log(finalStatus) //sukses
       const pushToken = await Notifications.getExpoPushTokenAsync()
       setPushtoken(pushToken)
       console.log("Notification Token: ", pushToken);
       console.log('====================')
-      console.log(pushToken)
+      console.log(pushToken, `INI PUSH TOKENNNNNNNNNNNNNNNNNNNNNNNN`)
       console.log('Name', Name)
       console.log('Desc', Desc)
       console.log('Date', Date)
@@ -71,9 +71,6 @@ export default function Home({ navigation, props }) {
       console.log('====================')
    }
    console.log('[[[[[]]]]]', pushtoken)
-   useEffect(() => {
-      getPushNotificationPermissions();
-   });
 
    let dataDropdown = [{
       value: 1,
@@ -86,9 +83,8 @@ export default function Home({ navigation, props }) {
    }]
 
    useEffect(() => {
-      // if (!access_token) {
-      //    navigation.navigate('Landing Page')
-      // }
+      getPushNotificationPermissions();
+
       axiosInstance({
          method: 'get',
          url: '/events'
@@ -114,7 +110,7 @@ export default function Home({ navigation, props }) {
          numOfRent: NumOfRent,
          location: Location,
          pushToken: pushtoken,
-         bodyNotif: `A new event is created: ${Name}!`
+         bodyNotif: `There's new event for you: ${Name}!`
       }
       AsyncStorage.getItem('access_token')
          .then(data => {

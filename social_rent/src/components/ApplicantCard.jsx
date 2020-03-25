@@ -107,7 +107,7 @@ export default function ApplicantCard(props) {
             <TouchableOpacity onPress={() => props.navigation.navigate('People Profile', {data: props.data})}>
                <Image
                   source={{
-                     uri: 'https://data.whicdn.com/images/324482590/original.jpg',
+                     uri: `${props.data.profilePicture}`,
                      height: 50, width: 50
                   }}
                   style={{ borderRadius: 100, marginTop: 10, marginBottom: 10 }}
