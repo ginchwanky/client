@@ -1,0 +1,6 @@
+export const EMPTY_INPUT = 'EMPTY_INPUT'
+export const SUCCESS_REGISTER = 'SUCCESS_REGISTER'
+export const FAILED_REGISTER = 'FAILED_REGISTER'
+export const SUCCESS_LOGIN = 'SUCCESS_LOGIN'
+export const FAILED_LOGIN = 'FAILED_LOGIN'
+export const LOGOUT = 'LOGOUT'
