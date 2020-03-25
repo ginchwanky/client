@@ -27,7 +27,8 @@ import axiosInstance from '../instances/axiosInstance'
 import EventCard from '../components/EventCard'
 import { useSelector } from 'react-redux';
 import { AsyncStorage } from 'react-native'
-
+import { Notifications } from 'expo';
+import * as Permissions from 'expo-permissions';
 const { width, height } = Dimensions.get("screen");
 
 export default function Home({ navigation, props }) {
@@ -42,6 +43,37 @@ export default function Home({ navigation, props }) {
    const [Location, setLocation] = useState('');
    const [NumOfRent, setNumOfRent] = useState(0);
    const [Data, setData] = useState([]);
+   const [pushtoken, setPushtoken] = useState('')
+
+   const getPushNotificationPermissions = async () => {
+      const { status: existingStatus } = await Permissions.getAsync(Permissions.NOTIFICATIONS);
+      let finalStatus = existingStatus;
+
+      if (existingStatus !== 'granted') {
+         const { status } = await Permissions.askAsync(Permissions.NOTIFICATIONS);
+         finalStatus = status;
+      }
+      if (finalStatus !== 'granted') {
+         return;
+      }
+      console.log(finalStatus)
+      const pushToken = await Notifications.getExpoPushTokenAsync()
+      setPushtoken(pushToken)
+      console.log("Notification Token: ", pushToken);
+      console.log('====================')
+      console.log(pushToken)
+      console.log('Name', Name)
+      console.log('Desc', Desc)
+      console.log('Date', Date)
+      console.log('Location', Location)
+      console.log('NumOfRent', NumOfRent)
+      console.log('NOTIF', `A new event is created: ${Name}!`)
+      console.log('====================')
+   }
+   console.log('[[[[[]]]]]', pushtoken)
+   useEffect(() => {
+      getPushNotificationPermissions();
+   });
 
    let dataDropdown = [{
       value: 1,
@@ -80,7 +112,9 @@ export default function Home({ navigation, props }) {
          desc: Desc,
          date: Date,
          numOfRent: NumOfRent,
-         location: Location
+         location: Location,
+         pushToken: pushtoken,
+         bodyNotif: `A new event is created: ${Name}!`
       }
       AsyncStorage.getItem('access_token')
          .then(data => {

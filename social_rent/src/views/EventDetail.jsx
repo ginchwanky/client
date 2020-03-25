@@ -41,7 +41,6 @@ export default function MyEventDetail({ route, navigation }) {
       const { status: existingStatus } = await Permissions.getAsync(Permissions.NOTIFICATIONS);
       let finalStatus = existingStatus;
 
-
       if (existingStatus !== 'granted') {
          const { status } = await Permissions.askAsync(Permissions.NOTIFICATIONS);
          finalStatus = status;
@@ -55,10 +54,10 @@ export default function MyEventDetail({ route, navigation }) {
       console.log("Notification Token: ", pushToken);
       console.log('====================')
       console.log(pushToken)
-      console.log('name', Data.creator.name)
+      console.log('name', Data.event.Users[0].name)
       console.log('event', Data.event.name)
       console.log('payment', payment)
-      console.log('notif:', `${Data.creator.name} applied to the event: ${Data.event.name}`)
+      console.log('notif:', `${Data.event.Users[0].name} joined the ${Data.event.name}'s event!`)
       console.log('====================')
    }
    console.log('[[[[[]]]]]', pushtoken)
@@ -72,7 +71,7 @@ export default function MyEventDetail({ route, navigation }) {
          payment: Number(payment),
          date: Data.event.date,
          pushToken: pushtoken,
-         body: `${Data.creator.name} applied to the event: ${Data.event.name}`
+         bodyNotif: `${Data.event.Users[0].name} joined the ${Data.event.name}'s event`
       }
       console.log('ini payload', payload)
       AsyncStorage.getItem('access_token')
@@ -127,8 +126,7 @@ export default function MyEventDetail({ route, navigation }) {
       axiosInstance.get(`/events/${id}`)
          .then(({ data }) => {
             setData(data)
-            console.log(data, `INI DATAAAAA`);
-            
+            // console.log(data, `INI DATAAAAA`);
             if (currentUserId == data.creator.id) {
                navigation.navigate('My Event Detail', { id: data.event.id })
             }
