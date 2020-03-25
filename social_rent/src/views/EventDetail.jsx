@@ -30,7 +30,7 @@ const { width, height } = Dimensions.get('screen')
 export default function MyEventDetail({ route, navigation }) {
    const { id } = route.params
    const currentUserId = useSelector(state => state.user.id)
-
+   const currentUserName = useSelector(state => state.user.name)
    const [Data, setData] = useState([]);
    const [ModalVisibility, setModalVisibility] = useState(false);
    const [payment, setpayment] = useState(null);
@@ -54,10 +54,10 @@ export default function MyEventDetail({ route, navigation }) {
       console.log("Notification Token: ", pushToken);
       console.log('====================')
       console.log(pushToken)
-      console.log('name', Data.event.Users[0].name)
+      console.log('name', currentUserName)
       console.log('event', Data.event.name)
       console.log('payment', payment)
-      console.log('notif:', `${Data.event.Users[0].name} joined the ${Data.event.name}'s event!`)
+      console.log('notif:', `${currentUserName} joined the ${Data.event.name}'s event!`)
       console.log('====================')
    }
    console.log('[[[[[]]]]]', pushtoken)
@@ -71,7 +71,7 @@ export default function MyEventDetail({ route, navigation }) {
          payment: Number(payment),
          date: Data.event.date,
          pushToken: pushtoken,
-         bodyNotif: `${Data.event.Users[0].name} joined the ${Data.event.name}'s event`
+         bodyNotif: `${currentUserName} joined the ${Data.event.name}'s event`
       }
       console.log('ini payload', payload)
       AsyncStorage.getItem('access_token')
@@ -126,7 +126,7 @@ export default function MyEventDetail({ route, navigation }) {
       axiosInstance.get(`/events/${id}`)
          .then(({ data }) => {
             setData(data)
-            // console.log(data, `INI DATAAAAA`);
+            console.log(data, `INI DATAAAAA`);
             if (currentUserId == data.creator.id) {
                navigation.navigate('My Event Detail', { id: data.event.id })
             }
