@@ -22,23 +22,56 @@ import Modal from 'react-native-modal';
 import axiosInstance from '../instances/axiosInstance'
 import { useSelector } from 'react-redux'
 
+import { Notifications } from 'expo';
+import * as Permissions from 'expo-permissions';
 
 const { width, height } = Dimensions.get('screen')
 
 export default function MyEventDetail({ route, navigation }) {
    const { id } = route.params
    const currentUserId = useSelector(state => state.user.id)
-
+   const currentUserName = useSelector(state => state.user.name)
    const [Data, setData] = useState([]);
    const [ModalVisibility, setModalVisibility] = useState(false);
    const [payment, setpayment] = useState(null);
    const [notes, setnotes] = useState('');
+   const [pushtoken, setPushtoken] = useState('')
+
+   const getPushNotificationPermissions = async () => {
+      const { status: existingStatus } = await Permissions.getAsync(Permissions.NOTIFICATIONS);
+      let finalStatus = existingStatus;
+
+      if (existingStatus !== 'granted') {
+         const { status } = await Permissions.askAsync(Permissions.NOTIFICATIONS);
+         finalStatus = status;
+      }
+      if (finalStatus !== 'granted') {
+         return;
+      }
+      console.log(finalStatus)
+      const pushToken = await Notifications.getExpoPushTokenAsync()
+      setPushtoken(pushToken)
+      console.log("Notification Token: ", pushToken);
+      console.log('====================')
+      console.log(pushToken)
+      console.log('name', currentUserName)
+      console.log('event', Data.event.name)
+      console.log('payment', payment)
+      console.log('notif:', `${currentUserName} joined the ${Data.event.name}'s event!`)
+      console.log('====================')
+   }
+   console.log('[[[[[]]]]]', pushtoken)
+   useEffect(() => {
+      getPushNotificationPermissions();
+   });
 
    const submitHandler = () => {
       let payload = {
          EventId: id,
          payment: Number(payment),
-         date: Data.event.date
+         date: Data.event.date,
+         pushToken: pushtoken,
+         bodyNotif: `${currentUserName} joined the ${Data.event.name}'s event`
       }
       console.log('ini payload', payload)
       AsyncStorage.getItem('access_token')
@@ -94,7 +127,6 @@ export default function MyEventDetail({ route, navigation }) {
          .then(({ data }) => {
             setData(data)
             console.log(data, `INI DATAAAAA`);
-            
             if (currentUserId == data.creator.id) {
                navigation.navigate('My Event Detail', { id: data.event.id })
             }

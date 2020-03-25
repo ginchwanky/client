@@ -32,6 +32,7 @@ import TransitionLogin from './src/components/transitionLogin'
 
 const Stack = createStackNavigator()
 const Tab = createBottomTabNavigator()
+console.disableYellowBox = true;
 
 function HomeScreen() {
   return (
@@ -58,7 +59,7 @@ function HomeScreen() {
       }}
       initialRouteName='Events'
     >
-      {/* <Tab.Screen name="Chats" component={Chats} /> */}
+      <Tab.Screen name="Chats" component={Chats} />
       <Tab.Screen name="Events" component={Home} />
       <Tab.Screen name="Profile" component={Profile} />
     </Tab.Navigator>
