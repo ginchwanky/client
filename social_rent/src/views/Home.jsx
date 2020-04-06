@@ -56,21 +56,10 @@ export default function Home({ navigation, props }) {
       if (finalStatus !== 'granted') {
          return;
       }
-      console.log(finalStatus) //sukses
       const pushToken = await Notifications.getExpoPushTokenAsync()
       setPushtoken(pushToken)
-      console.log("Notification Token: ", pushToken);
-      console.log('====================')
-      console.log(pushToken, `INI PUSH TOKENNNNNNNNNNNNNNNNNNNNNNNN`)
-      console.log('Name', Name)
-      console.log('Desc', Desc)
-      console.log('Date', Date)
-      console.log('Location', Location)
-      console.log('NumOfRent', NumOfRent)
-      console.log('NOTIF', `A new event is created: ${Name}!`)
-      console.log('====================')
+      
    }
-   console.log('[[[[[]]]]]', pushtoken)
 
    let dataDropdown = [{
       value: 1,

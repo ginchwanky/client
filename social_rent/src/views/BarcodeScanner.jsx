@@ -15,9 +15,6 @@ export default function BarcodeScanner({ route, navigation }) {
       const { status } = await BarCodeScanner.requestPermissionsAsync();
       setHasPermission(status === 'granted');
     })();
-
-    console.log(route.params, `INI LHOOOOOOOOOOOOOOO`);
-
   }, []);
 
   const handleBarCodeScanned = ({ type, data }) => {
@@ -48,8 +45,7 @@ export default function BarcodeScanner({ route, navigation }) {
                 navigation.navigate('My Events')
               })
               .catch(err => {
-                console.log(err.response, `INI ERRORRR PAYMENT`);
-
+                //there'll be some notifs here
               })
           }
         },

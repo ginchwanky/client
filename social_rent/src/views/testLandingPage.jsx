@@ -147,7 +147,6 @@ class Login extends Component {
         }
 
         this.toRegisterPage = () => {
-            console.log('ke hit nih');
             props.navigation.navigate('Register Page')
         }
     }

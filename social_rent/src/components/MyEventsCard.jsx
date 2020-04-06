@@ -13,12 +13,6 @@ import {
 } from 'galio-framework'
 
 export default function MyEventCard(props) {
-
-   useEffect(() => {
-      console.log(props);
-
-   }, [])
-
    return (
       <>
          <TouchableOpacity

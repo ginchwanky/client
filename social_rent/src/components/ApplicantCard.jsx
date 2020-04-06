@@ -24,8 +24,6 @@ export default function ApplicantCard(props) {
    
 
    const acceptApplicant = () => {
-      console.log('accept ke hit');
-
       axiosInstance({
          method: 'put',
          url: `/userEvent/applicants/${props.data.UserEvent.EventId}`,
@@ -53,7 +51,7 @@ export default function ApplicantCard(props) {
             setStatusApplicant('accepted')
          })
          .catch(err => {
-            console.log(err.response, `INI ERROR HIREEEEEE`);
+            console.log(err.response, `hire people error`);
             Alert.alert(
                'Already hired enough people', 'press ok to confirm', [
                   {

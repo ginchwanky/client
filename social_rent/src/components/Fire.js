@@ -64,7 +64,6 @@ class Fire {
     }
     // send the message to the Backend
     send = messages => {
-        console.log('PESANNYA', messages)
         for (let i = 0; i < messages.length; i++) {
             const { text, user } = messages[i];
             const message = {
