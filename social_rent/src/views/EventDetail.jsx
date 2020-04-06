@@ -173,7 +173,7 @@ export default function MyEventDetail({ route, navigation }) {
                      <Text h3 bold style={{ marginTop: 20 }}>{Data.event.name}</Text>
                      <Text muted center style={{ marginHorizontal: 20, marginVertical: 10 }}>{Data.event.description}</Text>
                      <Text p muted size={15}>Location: {Data.event.location}</Text>
-                     <Text p muted size={15}>Date: {Data.event.date}</Text>
+                     <Text p muted size={15}>Date: {Data.event.date.slice(0,10)}</Text>
                      <Text p muted bold size={15}>Status: Pending</Text>
                      <View style={styles.divider} />
                      <Text bold size={15} color="#525F7F">
