@@ -32,7 +32,7 @@ export default function MyEventDetail({ route, navigation }) {
             setEvent(data)
          })
          .catch(err => {
-            console.log(err.response, `INI ERROR EVENT GET ONE`);
+            console.log(err.response, `get one error`);
 
          })
    }, [ChangeStatus])

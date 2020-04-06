@@ -15,11 +15,10 @@ export default function TransitionRegister({ navigation, route }) {
     const dispatch = useDispatch()
 
     const retrieveData = async () => {
-        console.log('enter GetItem')
         try {
             const value = await AsyncStorage.getItem('access_token');
             if (value !== null) {
-                console.log('ASYNCSTORAGE COY', value);
+                console.log('async storage =>', value);
             }
         } catch (error) {
         }

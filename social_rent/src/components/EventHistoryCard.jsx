@@ -10,11 +10,6 @@ import { Text, Block, theme } from 'galio-framework'
 
 
 export default function EventHistoryCard(props) {
-
-   useEffect(() => {
-      console.log(props, `INI PROPSSSSSSSSS`);
-      
-   }, [])
    return (
       <>
          <Block middle>

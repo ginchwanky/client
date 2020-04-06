@@ -58,7 +58,7 @@ export default function Profile({ navigation }) {
         navigation.navigate('Landing Page')
       })
       .catch(err => {
-        console.log(err, `INI ERRRRR LOGOUT`);
+        console.log(err, `error logout`);
 
       })
   }
@@ -72,7 +72,7 @@ export default function Profile({ navigation }) {
         setEventsApplied(data)
       })
       .catch(err => {
-        console.log(err.response, `INI ERRORRRRR`);
+        console.log(err.response, `error get userEvent applied history`);
       })
   }
 
@@ -80,11 +80,10 @@ export default function Profile({ navigation }) {
     axiosInstance.get(`/events/history/${id}`)
       .then(({ data }) => {
         setEventsCreated(data)
-        console.log(data, `INI EVENT HISTORYYYYYYYYY`);
 
       })
       .catch(err => {
-        console.log(err.response, `INI ERROR HISTORY EVENT CREATED GET DI USEEFFECT`);
+        console.log(err.response, `error event hhistory`);
 
       })
   }

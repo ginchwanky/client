@@ -44,11 +44,10 @@ export default function PeopleProfile({ route, navigation }) {
     })
       .then(({ data }) => {
         setEventsApplied(data)
-        console.log(data, `INI EVENT APPLIEDDDDDDDD`);
 
       })
       .catch(err => {
-        console.log(err.response, `INI ERRORRRRR`);
+        console.log(err.response, `error applied event`);
       })
 
     axiosInstance.get(`/events/history/${data.id}`)
@@ -56,7 +55,7 @@ export default function PeopleProfile({ route, navigation }) {
         setEventsCreated(data)
       })
       .catch(err => {
-        console.log(err.response, `INI ERROR HISTORY EVENT CREATED GET DI USEEFFECT`);
+        console.log(err.response, `error history event`);
 
       })
   }, [])

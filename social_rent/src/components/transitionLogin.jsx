@@ -15,11 +15,10 @@ export default function TransitionLogin({ navigation, route }) {
     const dispatch = useDispatch()
 
     const retrieveData = async () => {
-        console.log('enter GetItem')
         try {
             const value = await AsyncStorage.getItem('access_token');
             if (value !== null) {
-                console.log('ASYNCSTORAGE COY', value);
+                console.log('async storage =>', value);
             }
         } catch (error) {
         }
@@ -31,7 +30,6 @@ export default function TransitionLogin({ navigation, route }) {
 
     useEffect(() => {
         if (access_token) {
-            console.log(access_token);
             navigation.navigate('Home')
         } else {
             navigation.navigate('Landing Page')

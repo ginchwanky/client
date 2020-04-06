@@ -48,19 +48,9 @@ export default function MyEventDetail({ route, navigation }) {
       if (finalStatus !== 'granted') {
          return;
       }
-      console.log(finalStatus)
       const pushToken = await Notifications.getExpoPushTokenAsync()
       setPushtoken(pushToken)
-      console.log("Notification Token: ", pushToken);
-      console.log('====================')
-      console.log(pushToken)
-      console.log('name', currentUserName)
-      console.log('event', Data.event.name)
-      console.log('payment', payment)
-      console.log('notif:', `${currentUserName} joined the ${Data.event.name}'s event!`)
-      console.log('====================')
    }
-   console.log('[[[[[]]]]]', pushtoken)
    useEffect(() => {
       getPushNotificationPermissions();
    });
@@ -73,11 +63,9 @@ export default function MyEventDetail({ route, navigation }) {
          pushToken: pushtoken,
          bodyNotif: `${currentUserName} joined the ${Data.event.name}'s event`
       }
-      console.log('ini payload', payload)
       AsyncStorage.getItem('access_token')
          .then(data => {
             data = JSON.parse(data)
-            console.log('ini token', data.access_token)
             return axiosInstance({
                url: '/userEvent',
                method: 'POST',
@@ -92,7 +80,6 @@ export default function MyEventDetail({ route, navigation }) {
                   })
                })
                .then(({ data }) => {
-                  console.log(data, '==========')
                   setData(data)
                   Alert.alert(
                      `You applied to this event successfully!`,
@@ -105,8 +92,6 @@ export default function MyEventDetail({ route, navigation }) {
                   )
                })
                .catch(err => {
-                  console.log(err.response.data, `INI DARI APPLIED EVENTTTTTT`);
-
                   Alert.alert(
                      `Oops`,
                      `${err.response.data.errors[0]}`,
@@ -126,13 +111,12 @@ export default function MyEventDetail({ route, navigation }) {
       axiosInstance.get(`/events/${id}`)
          .then(({ data }) => {
             setData(data)
-            console.log(data, `INI DATAAAAA`);
             if (currentUserId == data.creator.id) {
                navigation.navigate('My Event Detail', { id: data.event.id })
             }
          })
          .catch(err => {
-            console.log(err, `ERRRORRRRRRRRRRR`);
+            console.log(err, `error from get event`);
          })
    }, []);
    if (!Data.event) {

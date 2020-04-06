@@ -60,7 +60,7 @@ export default function MyEvents({ navigation }) {
             setEventsCreated(data)
          })
          .catch(err => {
-            console.log(err.response, `INI ERROR HISTORY EVENT CREATED GET DI USEEFFECT`);
+            console.log(err.response, `useEffect error history event`);
          })
    }, [])
 
